@@ -207,6 +207,36 @@ export default function Home() {
           beats={gardenBeats}
         />
 
+        {/* ---------- Companions gallery (real photos) ---------- */}
+        <section className="content content--cream" id="gallery">
+          <div className="wrap">
+            <Reveal className="center">
+              <p className="eyebrow eyebrow--gold">A few of our companions</p>
+              <h2 className="display dark">Raised with love</h2>
+              <p className="content-lede">
+                Hand-selected dogs, cats and small pets — healthy, socialised and ready for home.
+              </p>
+            </Reveal>
+            <div className="gallery">
+              {[
+                ["/assets/golden-retriever.jpg", "Golden Retriever"],
+                ["/assets/husky.jpg", "Siberian Husky"],
+                ["/assets/persian-cat.jpg", "Persian Cat"],
+                ["/assets/cocker-spaniel.jpg", "Cocker Spaniel"],
+                ["/assets/dalmatian.jpg", "Dalmatian"],
+                ["/assets/british-cat.jpg", "British Shorthair"],
+                ["/assets/hamster.jpg", "Hamster"],
+                ["/assets/saint-bernard.jpg", "Saint Bernard"],
+              ].map(([src, name], i) => (
+                <Reveal as={motion.figure} key={name} delay={(i % 4) * 0.08}>
+                  <img src={src} alt={name} loading="lazy" />
+                  <figcaption>{name}</figcaption>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ---------- Services ---------- */}
         <section className="content content--cream" id="services">
           <div className="wrap">
@@ -222,6 +252,7 @@ export default function Home() {
               {[
                 {
                   t: "Aquatics & Aquascaping",
+                  img: "/assets/aquarium.jpg",
                   items: [
                     "Designer & custom-built aquariums",
                     "Exotic, ornamental & edible fish",
@@ -232,6 +263,7 @@ export default function Home() {
                 },
                 {
                   t: "Pets & Lifestyle",
+                  img: "/assets/pet-lifestyle.jpg",
                   items: [
                     "Domestic & aided animals",
                     "Premium pet food & nutrition",
@@ -242,6 +274,7 @@ export default function Home() {
                 },
                 {
                   t: "Care, Safety & Compliance",
+                  img: "/assets/care-safety.jpg",
                   items: [
                     "DNA testing & microchipping",
                     "Pet vaccinations",
@@ -256,12 +289,7 @@ export default function Home() {
                   delay={i * 0.12}
                   whileHover={{ y: -6, boxShadow: "0 24px 54px rgba(42,33,24,.14)" }}
                 >
-                  <div className="ccard-ic">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-                      <path d="M2 12c3-5 15-5 18 0-3 5-15 5-18 0z" />
-                      <circle cx="16" cy="12" r="1.3" fill="currentColor" />
-                    </svg>
-                  </div>
+                  <img className="svc-banner" src={c.img} alt={c.t} loading="lazy" />
                   <h3>{c.t}</h3>
                   <ul className="tick">
                     {c.items.map((it) => (
@@ -328,25 +356,28 @@ export default function Home() {
               {[
                 {
                   m: "BD",
+                  img: "/assets/bernard.jpg",
                   n: "Mr. Bernard Dominic Dias",
                   r: "Founder & Chairman",
                   b: "A former Airport Manager, Mr. Dias turned his lifelong passion for aquatics and animals into Dolphin Aquarium & Pets. His vision and discipline laid the foundation for Goa's most trusted pet brand.",
                 },
                 {
                   m: "CD",
+                  img: "/assets/celine.jpg",
                   n: "Ms. Celine Felecia Dias",
                   r: "Co-Founder & Vice Chairman",
                   b: "A former Director at Volga Engineers, Bethora, Ms. Dias professionally scaled the brand. Her leadership and operational excellence propelled it to industry recognition.",
                 },
                 {
                   m: "AD",
+                  img: "/assets/alistair.jpg",
                   n: "Mr. Alistair Dias",
                   r: "Managing Director",
                   b: "With international experience across aviation and luxury hospitality — SpiceJet, Marriott, Virgin Voyages, Radisson, Qatar Airways and Seabourn — Alistair brings world-class service standards to every vertical he leads.",
                 },
               ].map((f, i) => (
                 <Reveal className="founder" key={f.m} delay={i * 0.12} whileHover={{ y: -6 }}>
-                  <div className="monogram">{f.m}</div>
+                  <img className="founder-photo" src={f.img} alt={f.n} loading="lazy" />
                   <h3>{f.n}</h3>
                   <p className="role">{f.r}</p>
                   <p>{f.b}</p>
@@ -364,9 +395,13 @@ export default function Home() {
               <h2 className="display dark">Loved across Goa</h2>
             </Reveal>
             <div className="clients-row">
-              {["St. Regis Goa Resort", "Fisherman's Wharf", "Radisson Blu Resort Goa"].map((c, i) => (
-                <Reveal as={motion.span} key={c} delay={i * 0.08} whileHover={{ y: -3 }}>
-                  {c}
+              {[
+                ["/assets/client1.png", "St. Regis Goa Resort"],
+                ["/assets/client2.png", "Fisherman's Wharf"],
+                ["/assets/client3.png", "Radisson Blu Resort Goa"],
+              ].map(([src, name], i) => (
+                <Reveal className="client-logo" key={name} delay={i * 0.08} whileHover={{ y: -3 }}>
+                  <img src={src} alt={name} loading="lazy" />
                 </Reveal>
               ))}
             </div>
