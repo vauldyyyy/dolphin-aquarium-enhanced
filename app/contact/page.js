@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
+import LiveBackground from "../../components/LiveBackground";
+import { ScrollProgress, Words, Magnetic } from "../../components/motionKit";
 
 export default function Contact() {
   const [status, setStatus] = useState("");
@@ -23,15 +25,17 @@ export default function Contact() {
 
   return (
     <>
+      <ScrollProgress />
       <Nav staticLight />
       <main>
-        <section className="page-top">
-          <Reveal>
+        <section className="page-top has-live-bg">
+          <LiveBackground variant="forest" density={0.8} />
+          <Reveal className="wrap">
             <p className="crumbs">
               <a href="/">Home</a> / Contact
             </p>
             <p className="eyebrow eyebrow--gold">Get in touch</p>
-            <h1 className="display">Visit Us in Madgaon, Goa</h1>
+            <Words className="display" text="Visit Us in Madgaon, Goa" as={motion.h1} />
             <p className="content-lede">
               Come meet our fish and pets in person, or reach out — we&apos;re happy to help with
               advice, custom builds and availability.

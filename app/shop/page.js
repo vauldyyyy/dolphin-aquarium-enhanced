@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
+import LiveBackground from "../../components/LiveBackground";
+import { ScrollProgress, Words } from "../../components/motionKit";
 
 const WA = "https://wa.me/919953858521";
 
@@ -58,15 +60,17 @@ const GROUPS = [
 export default function Shop() {
   return (
     <>
+      <ScrollProgress />
       <Nav staticLight />
       <main>
-        <section className="page-top">
-          <Reveal>
+        <section className="page-top has-live-bg">
+          <LiveBackground variant="forest" density={0.8} />
+          <Reveal className="wrap">
             <p className="crumbs">
               <a href="/">Home</a> / Shop
             </p>
             <p className="eyebrow eyebrow--gold">Our collections</p>
-            <h1 className="display">Shop Aquariums, Fish &amp; Essentials</h1>
+            <Words className="display" text="Shop Aquariums, Fish & Essentials" as={motion.h1} />
             <p className="content-lede">
               A curated selection from our Madgaon showroom. Prices are indicative — message us on
               WhatsApp for live availability, sizing and custom builds.

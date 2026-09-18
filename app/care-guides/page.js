@@ -1,8 +1,11 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
+import LiveBackground from "../../components/LiveBackground";
+import { ScrollProgress, Words } from "../../components/motionKit";
 
 const GUIDES = [
   ["Setting up your first aquarium", "Aquariums", "Your First Aquarium", "Tank size, placement, substrate, filtration and lighting — everything to know before adding water.", false],
@@ -16,15 +19,17 @@ const GUIDES = [
 export default function CareGuides() {
   return (
     <>
+      <ScrollProgress />
       <Nav staticLight />
       <main>
-        <section className="page-top">
-          <Reveal>
+        <section className="page-top has-live-bg">
+          <LiveBackground variant="forest" density={0.8} />
+          <Reveal className="wrap">
             <p className="crumbs">
               <a href="/">Home</a> / Care Guides
             </p>
             <p className="eyebrow eyebrow--gold">Learn with us</p>
-            <h1 className="display">Expert Care Guides</h1>
+            <Words className="display" text="Expert Care Guides" as={motion.h1} />
             <p className="content-lede">
               Three decades of hands-on knowledge, distilled into simple guides. New to fishkeeping
               or bringing home a pet? Start here — then visit us and we&apos;ll help in person.

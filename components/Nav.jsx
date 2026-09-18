@@ -53,11 +53,17 @@ export default function Nav({ staticLight = false, watchId = "companions" }) {
         transition={{ duration: 0.5, ease: EASE }}
       >
         <div className="nav-inner">
-          <motion.div animate={{ color: inkStrong }} transition={{ duration: 0.5, ease: EASE }}>
-            <Link className="nav-logo" href="/">
-              DOLPHIN
-            </Link>
-          </motion.div>
+          <Link href="/" aria-label="Dolphin Aquarium & Pets — home">
+            <motion.img
+              className="nav-logo-img"
+              src="/assets/logo-mark.png"
+              alt="Dolphin Aquarium & Pets"
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: EASE }}
+              whileHover={{ scale: 1.04 }}
+            />
+          </Link>
 
           <motion.nav
             className="nav-links"
@@ -79,9 +85,10 @@ export default function Nav({ staticLight = false, watchId = "companions" }) {
               target="_blank"
               rel="noopener"
               animate={{
-                background: light
-                  ? "linear-gradient(120deg,#d69a34,#3fa65b)"
-                  : "linear-gradient(120deg,#ff3d43,#ff9a3d)",
+                background: "linear-gradient(120deg,#d82018,#f2542d)",
+                boxShadow: light
+                  ? "0 8px 24px rgba(216,32,24,.28)"
+                  : "0 8px 24px rgba(216,32,24,.40)",
               }}
               whileHover={{ scale: 1.04, y: -1 }}
               whileTap={{ scale: 0.97 }}

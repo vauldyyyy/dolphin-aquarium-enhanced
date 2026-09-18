@@ -4,7 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";
 import Reveal from "../components/Reveal";
 import ScrollSequence from "../components/ScrollSequence";
+import LiveBackground from "../components/LiveBackground";
 import { useImageSequence } from "../components/useImageSequence";
+import {
+  ScrollProgress,
+  CountUp,
+  lakhFormat,
+  Magnetic,
+  Words,
+  Marquee,
+} from "../components/motionKit";
 
 const EASE = [0.22, 0.61, 0.36, 1];
 const AQUATIC_COUNT = 240;
@@ -153,6 +162,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
+      <ScrollProgress />
       <Nav />
 
       <main>
@@ -169,14 +179,15 @@ export default function Home() {
         />
 
         {/* ---------- Interlude ---------- */}
-        <section className="interlude" id="care">
+        <section className="interlude has-live-bg" id="care">
+          <LiveBackground variant="aqua" density={1.1} />
           <div className="interlude-grid">
             {[
-              ["12+", "years perfecting living displays"],
-              ["100%", "certified provenance"],
+              [<CountUp key="a" to={32} suffix="+" />, "years perfecting living displays"],
+              [<CountUp key="b" to={100} suffix="%" />, "certified provenance"],
               ["24/7", "monitored life-support systems"],
             ].map(([n, label], i) => (
-              <Reveal className="s" key={n} delay={i * 0.1}>
+              <Reveal className="s" key={label} delay={i * 0.1}>
                 <b>{n}</b>
                 <span>{label}</span>
               </Reveal>
@@ -208,11 +219,12 @@ export default function Home() {
         />
 
         {/* ---------- Companions gallery (real photos) ---------- */}
-        <section className="content content--cream" id="gallery">
+        <section className="content content--cream has-live-bg" id="gallery">
+          <LiveBackground variant="forest" density={0.9} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">A few of our companions</p>
-              <h2 className="display dark">Raised with love</h2>
+              <Words className="display dark" text="Raised with love" />
               <p className="content-lede">
                 Hand-selected dogs, cats and small pets — healthy, socialised and ready for home.
               </p>
@@ -238,11 +250,12 @@ export default function Home() {
         </section>
 
         {/* ---------- Services ---------- */}
-        <section className="content content--cream" id="services">
+        <section className="content content--cream has-live-bg" id="services">
+          <LiveBackground variant="forest" density={0.8} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">What we offer</p>
-              <h2 className="display dark">Products &amp; Services</h2>
+              <Words className="display dark" text="Products & Services" />
               <p className="content-lede">
                 Comprehensive solutions for all your aquatic and pet care needs — the same care
                 behind everything you just saw.
@@ -303,11 +316,12 @@ export default function Home() {
         </section>
 
         {/* ---------- Why us ---------- */}
-        <section className="content content--espresso" id="why">
+        <section className="content content--espresso has-live-bg" id="why">
+          <LiveBackground variant="aqua" density={1.25} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Why us</p>
-              <h2 className="display">Why Dolphin Aquarium &amp; Pets?</h2>
+              <Words className="display" text="Why Dolphin Aquarium & Pets?" />
               <p className="content-lede muted">
                 Redefining pet wellness in Goa since 1992 — over three decades of expertise and the
                 trust of more than 2 lakh customers.
@@ -315,12 +329,12 @@ export default function Home() {
             </Reveal>
             <div className="stat-row">
               {[
-                ["30+", "Years of expertise"],
-                ["2,00,000+", "Happy customers"],
-                ["5×", "Top retailer recognition"],
-                ["100%", "Health guarantee"],
+                [<CountUp key="y" to={32} suffix="+" />, "Years of expertise"],
+                [<CountUp key="c" to={200000} format={lakhFormat} suffix="+" />, "Happy customers"],
+                [<CountUp key="r" to={5} suffix="×" />, "Top retailer recognition"],
+                [<CountUp key="h" to={100} suffix="%" />, "Health guarantee"],
               ].map(([n, l], i) => (
-                <Reveal className="s" key={n} delay={i * 0.08}>
+                <Reveal className="s" key={l} delay={i * 0.08}>
                   <b>{n}</b>
                   <span>{l}</span>
                 </Reveal>
@@ -342,11 +356,12 @@ export default function Home() {
         </section>
 
         {/* ---------- Founders ---------- */}
-        <section className="content content--cream" id="founders">
+        <section className="content content--cream has-live-bg" id="founders">
+          <LiveBackground variant="forest" density={0.75} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Leadership</p>
-              <h2 className="display dark">Meet Our Founders</h2>
+              <Words className="display dark" text="Meet Our Founders" />
               <p className="content-lede">
                 Visionary leaders who combined their passion for aquatic life and pet care into an
                 unparalleled experience.
@@ -388,12 +403,26 @@ export default function Home() {
         </section>
 
         {/* ---------- Testimonials ---------- */}
-        <section className="content content--sand" id="reviews">
+        <section className="content content--sand has-live-bg" id="reviews">
+          <LiveBackground variant="forest" density={0.7} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Trusted by industry leaders</p>
-              <h2 className="display dark">Loved across Goa</h2>
+              <Words className="display dark" text="Loved across Goa" />
             </Reveal>
+            <Marquee
+              items={[
+                "Custom aquariums",
+                "Exotic fish",
+                "Pet grooming",
+                "Vaccinations",
+                "Aquascaping",
+                "Walk-in aviaries",
+                "Microchipping",
+                "Premium nutrition",
+              ]}
+              className="marquee--reviews"
+            />
             <div className="clients-row">
               {[
                 ["/assets/client1.png", "St. Regis Goa Resort"],
@@ -428,34 +457,39 @@ export default function Home() {
         </section>
 
         {/* ---------- Finale / Contact ---------- */}
-        <section className="finale" id="visit">
+        <section className="finale has-live-bg" id="visit">
+          <LiveBackground variant="forest" density={1} />
           <Reveal className="finale-inner">
             <p className="eyebrow eyebrow--gold">DOLPHIN · AQUARIUM &amp; PETS</p>
-            <h2 className="display display--xl grad-gold">Find your companion.</h2>
+            <Words className="display display--xl grad-gold" text="Find your companion." />
             <p className="lede lede--dark">
               Step into Dolphin Aquarium &amp; Pets in Madgaon, Goa — and meet them in person.
             </p>
             <div className="finale-actions">
-              <motion.a
-                className="btn btn--grad"
-                href="https://wa.me/919953858521"
-                target="_blank"
-                rel="noopener"
-                whileHover={{ y: -3, boxShadow: "0 18px 40px rgba(63,166,91,.45)" }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Chat on WhatsApp
-              </motion.a>
-              <motion.a
-                className="btn btn--ghost"
-                href="https://www.google.com/maps?q=Dolphin+Aquarium+and+Pets+Madgaon+Goa"
-                target="_blank"
-                rel="noopener"
-                whileHover={{ y: -3, borderColor: "#2a2118" }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Get directions
-              </motion.a>
+              <Magnetic strength={0.3}>
+                <motion.a
+                  className="btn btn--brand"
+                  href="https://wa.me/919953858521"
+                  target="_blank"
+                  rel="noopener"
+                  whileHover={{ y: -3, boxShadow: "0 20px 44px rgba(216,32,24,.45)" }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Chat on WhatsApp
+                </motion.a>
+              </Magnetic>
+              <Magnetic strength={0.3}>
+                <motion.a
+                  className="btn btn--ghost"
+                  href="https://www.google.com/maps?q=Dolphin+Aquarium+and+Pets+Madgaon+Goa"
+                  target="_blank"
+                  rel="noopener"
+                  whileHover={{ y: -3, borderColor: "#2a2118" }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Get directions
+                </motion.a>
+              </Magnetic>
             </div>
 
             <div className="visit-details">
