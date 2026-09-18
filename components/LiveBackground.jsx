@@ -26,8 +26,8 @@ export default function LiveBackground({ variant = "aqua", density = 1, classNam
     const isAqua = variant === "aqua";
 
     function seed() {
-      const target = Math.round(((W * H) / 24000) * density);
-      const n = Math.max(14, Math.min(target, 95));
+      const target = Math.round(((W * H) / 17000) * density);
+      const n = Math.max(18, Math.min(target, 150));
       bits = Array.from({ length: n }, () =>
         isAqua
           ? {
@@ -55,7 +55,7 @@ export default function LiveBackground({ variant = "aqua", density = 1, classNam
       shafts = Array.from({ length: 4 }, () => ({
         x: rand(-0.15, 1.1),
         w: rand(0.05, 0.16),
-        a: rand(0.025, 0.075),
+        a: rand(0.018, 0.05),
         s: rand(0.00004, 0.00013),
         ph: rand(0, Math.PI * 2),
       }));
@@ -95,23 +95,15 @@ export default function LiveBackground({ variant = "aqua", density = 1, classNam
     function render() {
       if (!W || !H) return;
 
-      // --- base wash -------------------------------------------------
-      const bg = ctx.createLinearGradient(0, 0, 0, H);
-      if (isAqua) {
-        bg.addColorStop(0, "#06243d");
-        bg.addColorStop(0.55, "#04182a");
-        bg.addColorStop(1, "#020d18");
-      } else {
-        bg.addColorStop(0, "#f8f3ea");
-        bg.addColorStop(1, "#ece0cd");
-      }
-      ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, W, H);
+      // Transparent overlay: the section's own background shows through,
+      // so adjacent sections never show a seam.
+      ctx.clearRect(0, 0, W, H);
 
-      // --- ambient glow ---------------------------------------------
-      const gx = W * (0.5 + Math.sin(t * 0.00018) * 0.18);
-      const glow = ctx.createRadialGradient(gx, H * 0.05, 0, gx, H * 0.05, Math.max(W, H) * 0.85);
-      glow.addColorStop(0, isAqua ? "rgba(24,104,176,0.30)" : "rgba(255,206,120,0.42)");
+      // --- drifting ambient glow ------------------------------------
+      const gx = W * (0.5 + Math.sin(t * 0.00016) * 0.28);
+      const gy = H * (0.35 + Math.cos(t * 0.00011) * 0.25);
+      const glow = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(W, H) * 0.7);
+      glow.addColorStop(0, isAqua ? "rgba(32,124,200,0.16)" : "rgba(255,198,104,0.16)");
       glow.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, W, H);

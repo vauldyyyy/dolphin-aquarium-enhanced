@@ -135,15 +135,19 @@ const gardenBeats = [
 /* ----------------------------- Page ----------------------------- */
 export default function Home() {
   const aquatic = useImageSequence("/frames/aquatic", AQUATIC_COUNT, true);
-  // Garden starts loading once the aquatic chapter is ready
+  // Garden starts loading once the aquatic chapter has fully arrived
   const garden = useImageSequence("/frames/garden", GARDEN_COUNT, aquatic.done);
 
-  const pct = Math.round((aquatic.loaded / AQUATIC_COUNT) * 100);
+  // Reveal as soon as enough of the opening is buffered — the sequence falls
+  // back to the nearest decoded frame, so the rest can stream in behind.
+  const BUFFER = Math.min(72, AQUATIC_COUNT);
+  const ready = aquatic.loaded >= BUFFER || aquatic.done;
+  const pct = Math.min(100, Math.round((aquatic.loaded / BUFFER) * 100));
 
   return (
     <>
       <AnimatePresence>
-        {!aquatic.done && (
+        {!ready && (
           <motion.div
             className="loader"
             initial={{ opacity: 1 }}

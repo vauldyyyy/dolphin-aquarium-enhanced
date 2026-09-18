@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export const framePath = (dir, i) =>
-  `${dir}/ezgif-frame-${String(i + 1).padStart(3, "0")}.jpg`;
+  `${dir}/ezgif-frame-${String(i + 1).padStart(3, "0")}.webp`;
 
 /**
  * Preloads a numbered image sequence into memory.
