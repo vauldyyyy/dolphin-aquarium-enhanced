@@ -21,6 +21,35 @@ you scroll, then the page flows into the real business content.
 
 Plus dedicated routes: `/shop`, `/care-guides`, `/contact`.
 
+## The 100000x enhancement pass
+
+On top of the scrollytelling core:
+
+- **Shop, rebuilt** — 16 AI-generated product photos (deep-teal studio
+  style, ~110 KB each) across four collections, animated category filter
+  chips, and per-product **Enquire on WhatsApp** buttons that pre-fill the
+  message with the product and price. Product names/prices remain
+  indicative — confirm against live stock before launch.
+- **Companion quiz** — the gallery's *Find my companion* button opens a
+  4-question matcher (`components/CompanionQuiz.jsx`) that scores lifestyle
+  against fish / bird / dog / cat / small pet and hands off to a pre-filled
+  WhatsApp chat.
+- **Immersion layer** (`components/Immersion.jsx`) — a bubble cursor trail
+  over the two cinematic chapters (fine-pointer desktops only, disabled
+  under `prefers-reduced-motion`) and a fully synthesized WebAudio ocean
+  ambience with an off-by-default toggle — no audio assets to ship.
+- **Trust & SEO** — `PetStore` JSON-LD (hours, address, phone, socials),
+  full OpenGraph/Twitter cards, canonical URLs, per-route metadata,
+  `sitemap.xml`, `robots.txt`, and a branded 404.
+- **Contact form** — WhatsApp-first delivery with client-side validation
+  and a success state; email remains as a fallback mention.
+- **Reviews** — nine real Google reviews with corrected attribution (the
+  dachshund/Parvo story belongs to Lionel Hillery Antao).
+- **Security** — Next.js bumped to 14.2.35 (14.2.18 has a known CVE).
+
+Note: the JSON-LD omits geo coordinates on purpose — confirm the exact
+Google Maps pin before adding them.
+
 ## "More Than Pets" visit section
 
 A full-width section near the end of the homepage (after "The heart of
