@@ -11,6 +11,7 @@ import WhatsAppFloat from "../components/WhatsAppFloat";
 import LiveBackground from "../components/LiveBackground";
 import GardenBackground from "../components/GardenBackground";
 import CompanionsGallery from "../components/CompanionsGallery";
+import ReviewsWall from "../components/ReviewsWall";
 import Immersion from "../components/Immersion";
 import { useImageSequence } from "../components/useImageSequence";
 import {
@@ -299,6 +300,57 @@ export default function Home() {
                 </Reveal>
               ))}
             </div>
+
+            {/* Scrolling strip of everything we do */}
+            <div className="svc-marquee" aria-hidden="true">
+              <div className="svc-marquee-track">
+                {[
+                  "Designer & custom-built aquariums",
+                  "Aquascaping",
+                  "Exotic & ornamental fish",
+                  "Edible fish & live seafood",
+                  "Koi ponds",
+                  "Indoor filtration systems",
+                  "Outdoor filtration systems",
+                  "Waterfalls & water features",
+                  "Marine & reef systems",
+                  "Live plants & hardscape",
+                  "Domestic & aided animals",
+                  "Premium pet food & nutrition",
+                  "Luxury pet accessories",
+                  "Walk-in aviaries",
+                  "Pet grooming",
+                  "DNA testing & microchipping",
+                  "Pet vaccinations",
+                  "First aid & preventive care",
+                  "Tank maintenance",
+                  "Safe doorstep delivery",
+                ].concat([
+                  "Designer & custom-built aquariums",
+                  "Aquascaping",
+                  "Exotic & ornamental fish",
+                  "Edible fish & live seafood",
+                  "Koi ponds",
+                  "Indoor filtration systems",
+                  "Outdoor filtration systems",
+                  "Waterfalls & water features",
+                  "Marine & reef systems",
+                  "Live plants & hardscape",
+                  "Domestic & aided animals",
+                  "Premium pet food & nutrition",
+                  "Luxury pet accessories",
+                  "Walk-in aviaries",
+                  "Pet grooming",
+                  "DNA testing & microchipping",
+                  "Pet vaccinations",
+                  "First aid & preventive care",
+                  "Tank maintenance",
+                  "Safe doorstep delivery",
+                ]).map((s, i) => (
+                  <span key={i}><i />{s}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -389,62 +441,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ---------- Testimonials ---------- */}
-        <section className="content content--sand has-live-bg" id="reviews" data-nav="light">
+        {/* ---------- Clients ---------- */}
+        <section className="content content--sand has-live-bg" id="clients" data-nav="light">
           <GardenBackground leaves={6} paws={4} pollen={0.7} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Trusted by industry leaders</p>
-              <Words className="display dark" text="Loved across Goa" />
+              <Words className="display dark" text="Goa's finest trust us" />
+              <p className="content-lede">
+                Serving discerning collectors and prestigious establishments who expect nothing but
+                excellence.
+              </p>
             </Reveal>
-            <Marquee
-              items={[
-                "Custom aquariums",
-                "Exotic fish",
-                "Pet grooming",
-                "Vaccinations",
-                "Aquascaping",
-                "Walk-in aviaries",
-                "Microchipping",
-                "Premium nutrition",
-              ]}
-              className="marquee--reviews"
-            />
             <div className="clients-row">
               {[
                 ["/assets/client1.png", "St. Regis Goa Resort"],
                 ["/assets/client2.png", "Fisherman's Wharf"],
                 ["/assets/client3.png", "Radisson Blu Resort Goa"],
               ].map(([src, name], i) => (
-                <Reveal className="client-logo" key={name} delay={i * 0.08} whileHover={{ y: -3 }}>
+                <Reveal className="client-logo" key={name} delay={i * 0.08} whileHover={{ y: -4 }}>
                   <img src={src} alt={name} loading="lazy" />
-                </Reveal>
-              ))}
-            </div>
-            <div className="tcols">
-              {[
-                ["SA", "Sarah Alvares", "Extremely happy with the 4ft aquarium tank made by Dolphin Aquarium. From planning the tank to build quality to safe doorstep delivery — everything was handled professionally. Alistair and his dad went the extra mile, sharing filtration and maintenance knowledge. You can trust them for quality work and honest support. 👍🐠"],
-                ["DK", "Diksha Kavlekar", "We recently visited and had an amazing experience! The owner was super friendly and knowledgeable, and made sure we found exactly what we needed for our furry friend. Clean, well-organized, and a wide range of products. ❤️"],
-                ["KG", "Kanishka Gowda", "The store is clean, well-organized and full of high-quality products. But what truly makes this place special is the owner. He's kind, knowledgeable, very sweet and genuinely passionate about animals. Every visit feels personal. Highly recommended 🐕"],
-                ["CV", "Casy Vaz", "The owner and staff are always attentive and assisting, with a beautiful and wide selection of fish, birds and many more beautiful creatures. Great deals too. Once again — highly recommended."],
-                ["CD", "Chalsie da Silva", "I recently bought a Doberman puppy from this shop and I'm extremely satisfied. The puppy is very good, active, and cute. The service was excellent and the owner was very friendly, patient, and supportive throughout the process."],
-                ["LH", "Lionel Hillery Antao", "I would rate it 5/5. Our dachshund pup fell sick with Parvovirus within a day. I contacted Mr. Alistair and he immediately told us to get the pup back. He gave us a new, healthy, vaccinated pup within a few days. So kind and understanding — thank you!"],
-                ["DG", "Deirdre Sharon Gomes", "This isn't just a store — it's a haven for pets and their humans. Hands-down the best pet shop I've ever visited. A one-stop shop for all things pet-related, backed by a team that treats you like family and your pet like royalty."],
-                ["PH", "Parth Hiremath", "Went in to get a buddy for our lovebird — she lost her mate a few days ago. Allister helped us find the perfect pair, and taught us tons as first-time bird parents. We also got some super cute fish! 💘 Totally recommend them. 💯"],
-                ["AM", "Arya Manjrekar", "Went to the pet store today — the shop was amazing and the owner was so sweet, telling us stuff we didn't know. It's rare to find such helpful pet store owners these days. You won't regret it!"],
-              ].map(([av, name, quote], i) => (
-                <Reveal as={motion.figure} className="tcard" key={name} delay={(i % 3) * 0.08}>
-                  <div className="stars">★★★★★</div>
-                  <p>&ldquo;{quote}&rdquo;</p>
-                  <figcaption>
-                    <span className="av">{av}</span>
-                    {name}
-                  </figcaption>
                 </Reveal>
               ))}
             </div>
           </div>
         </section>
+
+        {/* ---------- Reviews wall ---------- */}
+        <ReviewsWall />
 
         <HeartSection />
         <VisitWorld />

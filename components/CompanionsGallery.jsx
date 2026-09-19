@@ -204,7 +204,6 @@ export default function CompanionsGallery() {
                 >
                   {on && <motion.span layoutId="galPill" className="gal-pill" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
                   <span className="gal-chip-label">{f.label}</span>
-                  <span className="gal-count">{PETS.filter(f.test).length}</span>
                 </button>
               );
             })}

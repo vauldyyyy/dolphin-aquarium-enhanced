@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Icon from "./Icon";
 import { waLink } from "../lib/business";
@@ -75,6 +76,10 @@ const KIND_LABEL = { fish: "Aquatics", bird: "Bird", dog: "Dog", cat: "Cat", sma
 export default function CompanionQuiz({ open, onClose }) {
   const [step, setStep] = useState(0);
   const [scores, setScores] = useState({});
+  const [mounted, setMounted] = useState(false);
+
+  /* Portal target only exists in the browser — never render it during SSR */
+  useEffect(() => setMounted(true), []);
 
   const pick = (v) => {
     const next = { ...scores };
@@ -96,7 +101,9 @@ export default function CompanionQuiz({ open, onClose }) {
 
   const done = step >= QUESTIONS.length && winner;
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -184,6 +191,7 @@ export default function CompanionQuiz({ open, onClose }) {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
