@@ -190,7 +190,7 @@ export default function Home() {
         />
 
         {/* ---------- Interlude ---------- */}
-        <section className="interlude has-live-bg" id="care" data-nav="dark">
+        <section className="interlude has-live-bg amb-ocean" id="care" data-nav="dark">
           <LiveBackground variant="aqua" density={1.1} />
           <div className="wrap">
             <Reveal>
@@ -238,8 +238,9 @@ export default function Home() {
         <CompanionsGallery />
 
         {/* ---------- Services ---------- */}
-        <section className="content content--cream has-live-bg" id="services" data-nav="light">
+        <section className="content content--cream has-live-bg amb-home" id="services" data-nav="light">
           <GardenBackground leaves={6} paws={3} pollen={0.8} />
+          <div className="amb-motes" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">What we offer</p>
@@ -355,7 +356,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Why us ---------- */}
-        <section className="content content--espresso has-live-bg" id="why" data-nav="dark">
+        <section className="content content--espresso has-live-bg amb-ocean" id="why" data-nav="dark">
           <LiveBackground variant="aqua" density={1.25} />
           <div className="wrap">
             <Reveal className="center">
@@ -395,7 +396,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Founders ---------- */}
-        <section className="content content--cream has-live-bg" id="founders" data-nav="light">
+        <section className="content content--cream has-live-bg amb-home" id="founders" data-nav="light">
           <GardenBackground leaves={5} paws={3} pollen={0.7} />
           <div className="wrap">
             <Reveal className="center">
@@ -442,7 +443,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Clients ---------- */}
-        <section className="content content--sand has-live-bg" id="clients" data-nav="light">
+        <section className="content content--sand has-live-bg amb-home" id="clients" data-nav="light">
           <GardenBackground leaves={6} paws={4} pollen={0.7} />
           <div className="wrap">
             <Reveal className="center">

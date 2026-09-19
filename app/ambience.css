@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Ambience — per-section living backdrops.
+   Three worlds: deep ocean (aquatic story), warm home (services/founders),
+   sunlit garden (companions). All layers are pure CSS (gradients, SVG
+   data-URIs, keyframes) so they cost almost nothing and respect the global
+   prefers-reduced-motion rule. Plus a site-wide film grain for craft.
+   ========================================================================== */
+
+/* ------------------------------ Ocean ------------------------------ */
+.amb-ocean {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 50% -20%, #0b3d61 0%, #06305a 38%, #041c38 68%, #020f1f 100%);
+}
+/* swaying god-rays from the surface */
+.amb-ocean::before {
+  content: "";
+  position: absolute; inset: -10% -20% auto -20%;
+  height: 75%;
+  background: repeating-linear-gradient(
+    100deg,
+    rgba(158, 231, 240, 0) 0deg,
+    rgba(158, 231, 240, 0.05) 6deg,
+    rgba(158, 231, 240, 0) 12deg,
+    rgba(158, 231, 240, 0) 20deg,
+    rgba(158, 231, 240, 0.08) 26deg,
+    rgba(158, 231, 240, 0) 34deg
+  );
+  transform-origin: top center;
+  animation: amb-rays 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes amb-rays {
+  from { transform: rotate(-2.5deg) translateX(-2%); opacity: 0.7; }
+  to   { transform: rotate(2.5deg) translateX(2%);  opacity: 1; }
+}
+/* slow caustic shimmer */
+.amb-ocean::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(38% 30% at 22% 68%, rgba(96, 200, 220, 0.10), transparent 70%),
+    radial-gradient(42% 34% at 74% 30%, rgba(96, 200, 220, 0.08), transparent 70%),
+    radial-gradient(30% 26% at 52% 82%, rgba(96, 200, 220, 0.07), transparent 70%);
+  animation: amb-caustics 11s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes amb-caustics {
+  from { background-position: 0% 0%, 0% 0%, 0% 0%; }
+  to   { background-position: 4% 3%, -3% 5%, 3% -4%; }
+}
+
+/* ------------------------------ Home ------------------------------- */
+.amb-home {
+  position: relative;
+  background:
+    radial-gradient(90% 60% at 82% 0%, rgba(233, 199, 124, 0.22), transparent 60%),
+    linear-gradient(180deg, #f8f3e9 0%, #f4eddc 100%);
+}
+/* warm lamp glow */
+.amb-home::before {
+  content: "";
+  position: absolute; top: -12%; right: 4%;
+  width: 46vw; max-width: 620px; aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233, 199, 124, 0.30), rgba(233, 199, 124, 0) 62%);
+  animation: amb-breathe 9s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes amb-breathe {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.06); }
+}
+/* paw-print watermark paper */
+.amb-home::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%237a6242' fill-opacity='0.055'%3E%3Cellipse cx='45' cy='52' rx='7' ry='10'/%3E%3Cellipse cx='63' cy='42' rx='7' ry='10'/%3E%3Cellipse cx='81' cy='42' rx='7' ry='10'/%3E%3Cellipse cx='99' cy='52' rx='7' ry='10'/%3E%3Cpath d='M44 84c0-10 9-20 22-20s28 10 28 20c0 11-11 5-28 5s-22 6-22-5Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 140px 140px;
+  pointer-events: none;
+}
+
+/* ------------------------------ Garden ----------------------------- */
+.amb-garden {
+  position: relative;
+  background:
+    radial-gradient(80% 55% at 18% 0%, rgba(201, 226, 170, 0.35), transparent 60%),
+    radial-gradient(70% 50% at 88% 8%, rgba(233, 199, 124, 0.25), transparent 55%),
+    linear-gradient(180deg, #f7f3e7 0%, #eef0dc 100%);
+}
+/* leafy silhouettes swaying at the edges */
+.amb-garden::before,
+.amb-garden::after {
+  content: "";
+  position: absolute; top: -4%;
+  width: 260px; height: 75%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='520' viewBox='0 0 260 520'%3E%3Cg fill='%234e6b3a' fill-opacity='0.10'%3E%3Cpath d='M40 0c30 60 20 140-10 200 40-20 70 10 60 60-8 40-50 50-80 30 20 60 10 130-20 180-10 15-30 10-30-10 0-80 10-160 0-240S20 60 40 0Z'/%3E%3Cpath d='M170 40c40 50 40 130 10 190 40-10 60 30 40 70-15 35-55 40-80 20 25 55 20 120-5 170-12 20-34 12-32-10 5-75 15-150 5-225S150 90 170 40Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: contain;
+  transform-origin: top center;
+  animation: amb-sway 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.amb-garden::before { left: -70px; }
+.amb-garden::after { right: -70px; transform: scaleX(-1); animation-delay: -6s; }
+@keyframes amb-sway {
+  from { rotate: -1.6deg; }
+  to   { rotate: 1.6deg; }
+}
+
+/* drifting dust motes / pollen — attach to any .amb-* child you like */
+.amb-motes { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.amb-motes i {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(233, 199, 124, 0.5);
+  filter: blur(0.5px);
+  animation: amb-mote 16s linear infinite;
+}
+.amb-motes i:nth-child(1)  { left: 8%;  top: 85%; animation-delay: 0s;    animation-duration: 17s; }
+.amb-motes i:nth-child(2)  { left: 22%; top: 95%; animation-delay: -6s;   animation-duration: 21s; }
+.amb-motes i:nth-child(3)  { left: 36%; top: 88%; animation-delay: -11s;  animation-duration: 15s; background: rgba(158,231,240,.45); }
+.amb-motes i:nth-child(4)  { left: 51%; top: 92%; animation-delay: -3s;   animation-duration: 23s; }
+.amb-motes i:nth-child(5)  { left: 64%; top: 86%; animation-delay: -14s;  animation-duration: 18s; background: rgba(158,231,240,.4); }
+.amb-motes i:nth-child(6)  { left: 77%; top: 94%; animation-delay: -8s;   animation-duration: 20s; }
+.amb-motes i:nth-child(7)  { left: 89%; top: 90%; animation-delay: -16s;  animation-duration: 16s; background: rgba(158,231,240,.45); }
+@keyframes amb-mote {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  12%  { opacity: 0.85; }
+  55%  { transform: translate(-34px, -46vh); }
+  100% { transform: translate(22px, -92vh); opacity: 0; }
+}
+
+/* ------------------------------ Grain ------------------------------ */
+/* Site-wide film grain — the "expensive photo" finish. */
+.grain {
+  position: fixed; inset: -50%;
+  width: 200%; height: 200%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: amb-grain 900ms steps(4) infinite;
+}
+@keyframes amb-grain {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-2%, 1.4%); }
+  50%  { transform: translate(1.6%, -1%); }
+  75%  { transform: translate(-1%, -1.8%); }
+  100% { transform: translate(0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+}
+
+/* Ensure ambience layers sit beneath real content */
+.amb-ocean::before, .amb-ocean::after,
+.amb-home::before, .amb-home::after,
+.amb-garden::before, .amb-garden::after { z-index: 0; }
+.amb-ocean > .wrap, .amb-home > .wrap, .amb-garden > .wrap { position: relative; z-index: 1; }

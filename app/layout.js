@@ -2,6 +2,7 @@ import { Fraunces, Inter, Great_Vibes } from "next/font/google";
 import StickyActions from "../components/StickyActions";
 import "./globals.css";
 import "./sections.css";
+import "./ambience.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -121,6 +122,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <div className="grain" aria-hidden="true" />
         <StickyActions />
       </body>
     </html>

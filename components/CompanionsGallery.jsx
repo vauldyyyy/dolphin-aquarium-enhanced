@@ -144,8 +144,9 @@ export default function CompanionsGallery() {
   const shown = PETS.filter(active.test);
 
   return (
-    <section className="gal has-live-bg" id="gallery" data-nav="light" aria-label="A few of our companions">
+    <section className="gal has-live-bg amb-garden" id="gallery" data-nav="light" aria-label="A few of our companions">
       <GardenBackground leaves={10} paws={6} pollen={1} />
+      <div className="amb-motes" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
 
       <div className="wrap">
         <header className="gal-head">
