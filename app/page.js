@@ -188,17 +188,22 @@ export default function Home() {
         {/* ---------- Interlude ---------- */}
         <section className="interlude has-live-bg" id="care" data-nav="dark">
           <LiveBackground variant="aqua" density={1.1} />
-          <div className="interlude-grid">
-            {[
-              [<CountUp key="a" to={32} suffix="+" />, "years perfecting living displays"],
-              [<CountUp key="b" to={100} suffix="%" />, "certified provenance"],
-              ["24/7", "monitored life-support systems"],
-            ].map(([n, label], i) => (
-              <Reveal className="s" key={label} delay={i * 0.1}>
-                <b>{n}</b>
-                <span>{label}</span>
-              </Reveal>
-            ))}
+          <div className="wrap">
+            <Reveal>
+              <p className="interlude-eyebrow">A LIVING COLLECTION, CARED FOR SINCE 1992</p>
+            </Reveal>
+            <div className="interlude-grid">
+              {[
+                [<CountUp key="a" to={30} suffix="+" />, "years perfecting living displays"],
+                [<CountUp key="b" to={100} suffix="%" />, "certified provenance"],
+                ["24/7", "monitored life-support systems"],
+              ].map(([n, label], i) => (
+                <Reveal className="s" key={label} delay={i * 0.1}>
+                  <b>{n}</b>
+                  <span>{label}</span>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -336,7 +341,7 @@ export default function Home() {
             </Reveal>
             <div className="stat-row">
               {[
-                [<CountUp key="y" to={32} suffix="+" />, "Years of expertise"],
+                [<CountUp key="y" to={30} suffix="+" />, "Years of expertise"],
                 [<CountUp key="c" to={200000} format={lakhFormat} suffix="+" />, "Happy customers"],
                 [<CountUp key="r" to={5} suffix="×" />, "Top retailer recognition"],
                 [<CountUp key="h" to={100} suffix="%" />, "Health guarantee"],

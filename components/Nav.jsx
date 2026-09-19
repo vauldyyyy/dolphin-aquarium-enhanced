@@ -111,9 +111,9 @@ export default function Nav({ staticLight = false }) {
               whileHover={{ y: -2, boxShadow: "0 0 36px rgba(236,210,136,.40)" }}
               whileTap={{ scale: 0.97 }}
             >
-              <Icon name="pin" size={16} />
+              <Icon name="pin" size={18} />
               Visit us
-              <Icon name="arrow" size={16} className="nav-cta-arrow" />
+              <Icon name="arrow" size={18} className="nav-cta-arrow" />
             </MotionLink>
 
             <motion.button
