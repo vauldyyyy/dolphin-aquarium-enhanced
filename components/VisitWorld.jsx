@@ -79,7 +79,7 @@ export default function VisitWorld() {
   }, []);
 
   return (
-    <section className="vw" id="visit" ref={rootRef} data-nav="dark" aria-labelledby="vw-title">
+    <section className="vw" id="visit" ref={rootRef} data-nav="light" aria-labelledby="vw-title">
       {/* ---------------- living backdrop ---------------- */}
       <div className="vw-bg" aria-hidden="true">
         <div className="vw-water" />
@@ -242,7 +242,7 @@ export default function VisitWorld() {
                   href={directionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ y: -2, backgroundColor: "rgba(255,255,255,.12)" }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
                   Get Directions <Icon name="arrow" size={17} />

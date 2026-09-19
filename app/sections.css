@@ -19,13 +19,14 @@
 .vw-water {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 55% 45% at 58% 0%, rgba(128,206,248,.55), transparent 70%),
-    radial-gradient(ellipse 60% 55% at 55% 45%, rgba(24,118,200,.5), transparent 70%),
-    radial-gradient(ellipse 50% 60% at 100% 60%, rgba(10,80,140,.45), transparent 70%),
-    linear-gradient(180deg, #07345f 0%, #052a4f 40%, #041d3a 75%, #03152b 100%);
+    radial-gradient(ellipse 55% 45% at 55% 0%, rgba(150,220,255,.7), transparent 70%),
+    radial-gradient(ellipse 40% 35% at 88% 4%, rgba(120,200,245,.45), transparent 65%),
+    radial-gradient(ellipse 60% 55% at 55% 45%, rgba(36,140,220,.55), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 100% 60%, rgba(14,95,160,.5), transparent 70%),
+    linear-gradient(180deg, #0a4470 0%, #063360 40%, #04244a 75%, #031830 100%);
 }
 .vw-rays {
-  position: absolute; top: -240px; left: 32%; width: 900px; height: 1400px; opacity: .22;
+  position: absolute; top: -240px; left: 32%; width: 900px; height: 1400px; opacity: .34;
   background: repeating-conic-gradient(from 150deg at 50% 0%, transparent 0deg 6deg, rgba(170,225,255,.55) 8deg, transparent 10deg 17deg);
   filter: blur(8px); mix-blend-mode: screen; transform-origin: 50% 0%;
   animation: vw-rays 18s ease-in-out infinite alternate;
@@ -39,19 +40,19 @@
   background: radial-gradient(ellipse at 50% 30%, rgba(90,180,240,.18), transparent 70%);
 }
 .vw-scene {
-  position: absolute; top: 76px; left: 43%; width: clamp(360px, 29vw, 520px);
+  position: absolute; top: 40px; left: 40%; width: clamp(440px, 34vw, 640px);
   transform: translate(var(--px), var(--py)); will-change: transform;
 }
 .vw-scene img {
   width: 100%; height: auto; display: block;
-  mix-blend-mode: screen; filter: saturate(1.05) contrast(1.04);
+  mix-blend-mode: screen; filter: saturate(1.35) brightness(1.22) contrast(1.06);
   transform-origin: 50% 35%; animation: vw-drift 20s ease-in-out infinite alternate;
 }
 .vw-shade {
   position: absolute; inset: 0;
   background:
-    linear-gradient(90deg, rgba(3,22,44,.72) 0%, rgba(3,22,44,.35) 30%, transparent 52%),
-    linear-gradient(0deg, rgba(2,14,30,.92) 0%, rgba(2,14,30,.4) 16%, transparent 34%);
+    linear-gradient(90deg, rgba(3,22,44,.5) 0%, rgba(3,22,44,.18) 28%, transparent 50%),
+    linear-gradient(0deg, rgba(2,14,30,.85) 0%, rgba(2,14,30,.3) 14%, transparent 30%);
 }
 .vw-reef {
   position: absolute; left: -8px; bottom: 150px; width: 150px; height: auto;
@@ -138,18 +139,24 @@
 
 /* ---------- glass ---------- */
 .vw-glass {
-  background: linear-gradient(135deg, rgba(120,190,240,.2), rgba(20,80,140,.3) 55%, rgba(10,55,110,.42));
-  border: 1px solid rgba(190,228,255,.38); border-radius: 18px;
-  box-shadow: 0 18px 50px rgba(0,18,40,.35), inset 0 1px 0 rgba(235,251,255,.18);
+  background: linear-gradient(135deg, rgba(150,205,245,.18), rgba(35,100,160,.24) 55%, rgba(18,70,130,.32));
+  border: 1px solid rgba(200,235,255,.42); border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0,18,40,.32), inset 0 1px 0 rgba(235,251,255,.22);
   backdrop-filter: blur(18px) saturate(130%); -webkit-backdrop-filter: blur(18px) saturate(130%);
 }
 
-/* ---------- location card ---------- */
-.vw-location { padding: 22px 20px 20px; }
+/* ---------- location card: clean white card, as in the design ---------- */
+.vw-location {
+  padding: 20px 20px 18px;
+  background: #fff; border: none; border-radius: 22px; color: #1c2b38;
+  box-shadow: 0 26px 64px rgba(0,20,45,.5), 0 0 0 1px rgba(255,255,255,.06);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
 .vw-loc-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-.vw-loc-title { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; color: #fff; }
-.vw-loc-sub { font-size: 14px; color: rgba(225,236,246,.82); }
-.vw-map { position: relative; height: 250px; overflow: hidden; border-radius: 12px; background: #dfe8ee; }
+.vw-loc-title { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; color: #0f2f49; }
+.vw-loc-title svg { color: #1868b0; }
+.vw-loc-sub { font-size: 13.5px; font-weight: 600; color: #1868b0; }
+.vw-map { position: relative; height: 280px; overflow: hidden; border-radius: 14px; background: #dfe8ee; }
 .vw-map iframe { display: block; width: 100%; height: 100%; border: 0; }
 .vw-map-expand {
   position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center;
@@ -157,13 +164,14 @@
   background: rgba(10,60,110,.85); box-shadow: 0 6px 18px rgba(0,0,0,.25);
 }
 .vw-loc-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 14px; }
-.vw-loc-foot strong { font-size: 16px; font-weight: 600; }
-.vw-loc-foot p { margin: 4px 0 0; font-size: 12px; line-height: 1.5; color: rgba(225,236,246,.82); }
+.vw-loc-foot strong { font-size: 16px; font-weight: 600; color: #10222f; }
+.vw-loc-foot p { margin: 4px 0 0; font-size: 12px; line-height: 1.5; color: rgba(35,55,75,.72); }
 .vw-btn-outline {
   flex: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
-  padding: 10px 16px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.75);
-  font-size: 14px; font-weight: 600; color: #fff;
+  padding: 11px 18px; border-radius: 999px; border: 1.5px solid #123a5c;
+  font-size: 14px; font-weight: 600; color: #123a5c;
 }
+.vw-location .vw-btn-outline:hover { background: rgba(18,58,92,.08); }
 
 /* ---------- visit cards ---------- */
 .vw-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 18px; }
