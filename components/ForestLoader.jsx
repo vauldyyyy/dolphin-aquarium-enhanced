@@ -6,16 +6,16 @@ import { motion, AnimatePresence } from "framer-motion";
 const EASE = [0.22, 0.61, 0.36, 1];
 const MESSAGES = ["Waking up the jungle", "Untangling the vines", "Feeding the fish", "Counting the parrots"];
 
-/* The branch in the loader video (1120×630 source). It never moves across the
+/* The branch in the loader video (1280×720 source). It never moves across the
    clip, so the progress bar is pinned to it by mapping these coordinates
    through the same cover-fit the <video> uses. */
-const VIDEO = { w: 1120, h: 630 };
-const BRANCH = { x0: 356, x1: 898, cy: 390, h: 24 };
+const VIDEO = { w: 1280, h: 720 };
+const BRANCH = { x0: 372, x1: 914, cy: 390, h: 24 };
 
 /**
  * Jungle loading screen: a looping forest video (animals playing around a
- * hanging branch) where the branch itself is the progress bar — it lights up
- * from left to right as the site loads.
+ * hanging branch) where the branch itself is the progress bar — a slim line
+ * runs along it from left to right as the site loads.
  *
  * `progress` is the real load (0–100). The displayed value never runs ahead of
  * `minMs` of screen time, so the scene always gets a moment on screen.
@@ -115,13 +115,9 @@ export default function ForestLoader({ progress = 0, minMs = 3200, demo = false 
           transition={{ duration: 0.8, delay: 0.3 }}
           aria-hidden="true"
         >
+          <span className="fl-track" />
           <motion.div className="fl-fill" initial={{ width: 0 }} animate={{ width: `${shown}%` }} transition={spring}>
-            <motion.span
-              className="fl-tip"
-              style={{ x: "50%", y: "-50%" }}
-              animate={{ scale: [1, 1.35, 1], opacity: [0.85, 1, 0.85] }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-            />
+            <span className="fl-tip" />
           </motion.div>
           {/* slides from left-aligned (0%) to right-aligned (100%) so it never leaves the screen */}
           <motion.span
