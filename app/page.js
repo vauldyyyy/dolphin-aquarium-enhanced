@@ -1,10 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";
 import Reveal from "../components/Reveal";
 import ScrollSequence from "../components/ScrollSequence";
 import VisitWorld from "../components/VisitWorld";
+import ForestLoader from "../components/ForestLoader";
 import HeartSection from "../components/HeartSection";
 import SiteFooter from "../components/SiteFooter";
 import WhatsAppFloat from "../components/WhatsAppFloat";
@@ -25,6 +27,7 @@ import {
 const EASE = [0.22, 0.61, 0.36, 1];
 const AQUATIC_COUNT = 240;
 const GARDEN_COUNT = 300;
+const LOADER_MIN_MS = 3200;
 
 /* ----------------------------- Beats ----------------------------- */
 const aquaticBeats = [
@@ -151,25 +154,22 @@ export default function Home() {
   const ready = aquatic.loaded >= BUFFER || aquatic.done;
   const pct = Math.min(100, Math.round((aquatic.loaded / BUFFER) * 100));
 
+  // Give the jungle loader a moment on screen even on fast connections.
+  // Visiting /?loader keeps it open (looping) for previewing the design.
+  const [minDone, setMinDone] = useState(false);
+  const [preview, setPreview] = useState(false);
+  useEffect(() => {
+    setPreview(new URLSearchParams(window.location.search).has("loader"));
+    const id = setTimeout(() => setMinDone(true), LOADER_MIN_MS);
+    return () => clearTimeout(id);
+  }, []);
+  const showLoader = preview || !(ready && minDone);
+
   return (
     <>
       <AnimatePresence>
-        {!ready && (
-          <motion.div
-            className="loader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: EASE }}
-          >
-            <div className="loader-inner">
-              <img className="loader-logo" src="/assets/logo-white.png" alt="Dolphin Aquarium & Pets" />
-              <div className="loader-sub">Since 1992 · Madgaon, Goa</div>
-              <div className="loader-bar">
-                <motion.i animate={{ width: `${pct}%` }} transition={{ ease: EASE }} />
-              </div>
-              <div className="loader-pct">{pct}%</div>
-            </div>
-          </motion.div>
+        {showLoader && (
+          <ForestLoader key="loader" progress={pct} minMs={LOADER_MIN_MS} demo={preview} />
         )}
       </AnimatePresence>
 

@@ -380,3 +380,59 @@
   .pet-more a { padding: 6px 10px; font-size: 12px; }
   .gal-cta { flex-direction: column; align-items: flex-start; }
 }
+
+/* =====================================================================
+   Jungle loading screen (components/ForestLoader.jsx)
+   All motion is Framer Motion, so it keeps playing under reduced motion.
+   ===================================================================== */
+.fl {
+  position: fixed; inset: 0; z-index: 1000; overflow: hidden;
+  display: grid; place-items: center; color: #f4f1e6;
+  background: linear-gradient(180deg, #0c2a1b 0%, #17442c 40%, #10321f 68%, #081a10 100%);
+}
+.fl-sun {
+  position: absolute; left: 50%; top: -30vh; width: 130vh; height: 130vh; margin-left: -65vh;
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,218,140,.46), rgba(255,214,130,.12) 34%, rgba(255,214,130,0) 60%);
+}
+.fl-rays {
+  position: absolute; top: -30vh; left: 50%; width: 170vh; height: 170vh; margin-left: -85vh;
+  pointer-events: none; filter: blur(10px); mix-blend-mode: screen;
+  background: repeating-conic-gradient(from 150deg at 50% 0%, transparent 0deg 7deg, rgba(255,226,150,.55) 9deg, transparent 11deg 19deg);
+}
+.fl-trees { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; pointer-events: none; }
+.fl-trees--far { height: 62vh; }
+.fl-trees--mid { height: 46vh; }
+.fl-trees--near { height: 24vh; }
+.fl-mist { position: absolute; left: 0; right: 0; bottom: 0; height: 42vh; pointer-events: none; background: linear-gradient(0deg, rgba(190,225,190,.14), transparent); }
+.fl-vine { position: absolute; top: -4px; pointer-events: none; z-index: 1; }
+.fl-fern { position: absolute; bottom: -12px; width: min(38vw, 500px); height: auto; pointer-events: none; z-index: 4; }
+.fl-fern--l { left: -5vw; }
+.fl-fern--r { right: -5vw; }
+.fl-critter { position: absolute; pointer-events: none; z-index: 2; }
+.fl-bunny { left: 0; bottom: 5vh; width: 92px; height: 75px; z-index: 5; }
+.fl-frog { right: 22vw; bottom: 3vh; width: 76px; height: 56px; z-index: 5; }
+.fl-firefly {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; z-index: 2;
+  background: #fff3b0; box-shadow: 0 0 10px 3px rgba(255,236,140,.55);
+}
+.fl-leaf { position: absolute; top: 0; pointer-events: none; z-index: 3; }
+.fl-swinger { position: absolute; top: -4px; left: 6%; width: 110px; height: 44vh; pointer-events: none; z-index: 2; }
+.fl-swinger i { position: absolute; left: 50%; top: 0; bottom: 128px; width: 3px; margin-left: -1.5px; border-radius: 2px; background: linear-gradient(#2e6a33, #4a9a4a); }
+.fl-swinger svg { position: absolute; left: 50%; bottom: 0; width: 96px; height: 132px; margin-left: -48px; }
+
+.fl-center { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 16px; }
+.fl-logo { width: min(400px, 72vw); height: auto; filter: drop-shadow(0 6px 24px rgba(0,0,0,.35)); }
+.fl-tag { margin: 14px 0 0; font-size: 13px; font-weight: 500; letter-spacing: .38em; color: rgba(241,220,164,.9); }
+.fl-stage { width: min(980px, 96vw); height: auto; margin-top: 6px; overflow: visible; }
+.fl-status {
+  display: flex; align-items: baseline; justify-content: center; gap: 14px; min-height: 30px; margin-top: -4px;
+  font-family: var(--font-fraunces), Georgia, serif; font-size: clamp(19px, 1.9vw, 26px); color: rgba(244,241,230,.94);
+}
+.fl-status b { font-family: var(--font-inter), sans-serif; font-weight: 600; font-size: 18px; letter-spacing: .12em; color: #f1dca4; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .fl-swinger { display: none; }
+  .fl-fern { width: 52vw; }
+  .fl-frog { display: none; }
+  .fl-tag { font-size: 11px; letter-spacing: .26em; }
+}
