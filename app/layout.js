@@ -1,5 +1,6 @@
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
+import "./living.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],

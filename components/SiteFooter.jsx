@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function SiteFooter() {
   return (
-    <footer className="site-foot">
+    <footer className="site-foot" data-nav="dark">
       <div className="wrap">
         <div>
           <div className="logo">DOLPHIN</div>

@@ -20,6 +20,33 @@ you scroll, then the page flows into the real business content.
 
 Plus dedicated routes: `/shop`, `/care-guides`, `/contact`.
 
+## Living Aquarium hero (integrated package)
+
+The homepage opens with the **Living Aquarium** design (from the supplied
+`dolphin-aquarium.zip`), ported natively into React rather than embedded as an
+iframe, so it shares the site's nav, fonts and scroll:
+
+- `components/LivingHero.jsx` — hero, glass location card (click-to-load Google
+  Maps), "Plan your visit" cards with a live **Open now / Closed now** badge
+  (evaluated in Goa time), and the "Find your kind of wonder" cards. Includes the
+  package's canvas ocean (bubbles, fish silhouettes, caustics, click ripples,
+  pointer parallax) and the **Motion** / **Moonlight** toggles (saved locally).
+- `components/HeartSection.jsx` — "The heart of Dolphin" closing band.
+- `components/WhatsAppFloat.jsx` — floating "Say hello" button on every page.
+- `components/Icon.jsx` — the package's icon set as inline SVG.
+- `app/living.css` — the package stylesheet, scoped under `.dolphin-site`.
+- `lib/business.js` — **single source of truth** for phone, WhatsApp, address,
+  map query and opening hours. Edit here.
+
+Before launch (carried over from the package's own notes):
+
+- Phone, address and hours were transcribed from a screenshot — confirm them, and
+  confirm the number is WhatsApp-enabled.
+- The open/closed badge uses regular hours only; it doesn't know about holidays.
+- Check the Google Maps pin that the map query resolves to.
+- The dolphin-and-child scene is imaginative branding artwork, not a photo of the
+  actual store.
+
 ## How the animation works
 
 All motion is driven by Framer Motion:

@@ -1,16 +1,19 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Nav from "../components/Nav";
 import Reveal from "../components/Reveal";
 import ScrollSequence from "../components/ScrollSequence";
+import LivingHero from "../components/LivingHero";
+import HeartSection from "../components/HeartSection";
+import SiteFooter from "../components/SiteFooter";
+import WhatsAppFloat from "../components/WhatsAppFloat";
 import LiveBackground from "../components/LiveBackground";
 import { useImageSequence } from "../components/useImageSequence";
 import {
   ScrollProgress,
   CountUp,
   lakhFormat,
-  Magnetic,
   Words,
   Marquee,
 } from "../components/motionKit";
@@ -26,12 +29,12 @@ const aquaticBeats = [
     range: [0, 0.2],
     content: (
       <>
-        <p className="eyebrow eyebrow--aqua">DOLPHIN · AQUARIUM &amp; PETS · SINCE 1992</p>
-        <h1 className="display grad-aqua">
+        <p className="eyebrow eyebrow--aqua">CHAPTER ONE · AQUATICS</p>
+        <h2 className="display grad-aqua">
           Living art,
           <br />
           in motion.
-        </h1>
+        </h2>
         <p className="lede">
           Meet the chili red arowana — the crowned centrepiece of our aquatic collection.
         </p>
@@ -138,38 +141,14 @@ export default function Home() {
   // Garden starts loading once the aquatic chapter has fully arrived
   const garden = useImageSequence("/frames/garden", GARDEN_COUNT, aquatic.done);
 
-  // Reveal as soon as enough of the opening is buffered — the sequence falls
-  // back to the nearest decoded frame, so the rest can stream in behind.
-  const BUFFER = Math.min(72, AQUATIC_COUNT);
-  const ready = aquatic.loaded >= BUFFER || aquatic.done;
-  const pct = Math.min(100, Math.round((aquatic.loaded / BUFFER) * 100));
-
   return (
     <>
-      <AnimatePresence>
-        {!ready && (
-          <motion.div
-            className="loader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: EASE }}
-          >
-            <div className="loader-inner">
-              <div className="loader-mark">DOLPHIN</div>
-              <div className="loader-sub">Aquarium &amp; Pets · Since 1992</div>
-              <div className="loader-bar">
-                <motion.i animate={{ width: `${pct}%` }} transition={{ ease: EASE }} />
-              </div>
-              <div className="loader-pct">{pct}%</div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <ScrollProgress />
       <Nav />
 
-      <main>
+      <main id="main">
+        <LivingHero />
+
         {/* ---------- Chapter 1 — Aquatic ---------- */}
         <ScrollSequence
           id="aquatics"
@@ -183,7 +162,7 @@ export default function Home() {
         />
 
         {/* ---------- Interlude ---------- */}
-        <section className="interlude has-live-bg" id="care">
+        <section className="interlude has-live-bg" id="care" data-nav="dark">
           <LiveBackground variant="aqua" density={1.1} />
           <div className="interlude-grid">
             {[
@@ -200,7 +179,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Transition ---------- */}
-        <section className="transition">
+        <section className="transition" data-nav="dark">
           <Reveal>
             <p className="transition-line">
               But a home isn&apos;t complete with fins alone.
@@ -223,7 +202,7 @@ export default function Home() {
         />
 
         {/* ---------- Companions gallery (real photos) ---------- */}
-        <section className="content content--cream has-live-bg" id="gallery">
+        <section className="content content--cream has-live-bg" id="gallery" data-nav="light">
           <LiveBackground variant="forest" density={0.9} />
           <div className="wrap">
             <Reveal className="center">
@@ -254,7 +233,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Services ---------- */}
-        <section className="content content--cream has-live-bg" id="services">
+        <section className="content content--cream has-live-bg" id="services" data-nav="light">
           <LiveBackground variant="forest" density={0.8} />
           <div className="wrap">
             <Reveal className="center">
@@ -320,7 +299,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Why us ---------- */}
-        <section className="content content--espresso has-live-bg" id="why">
+        <section className="content content--espresso has-live-bg" id="why" data-nav="dark">
           <LiveBackground variant="aqua" density={1.25} />
           <div className="wrap">
             <Reveal className="center">
@@ -360,7 +339,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Founders ---------- */}
-        <section className="content content--cream has-live-bg" id="founders">
+        <section className="content content--cream has-live-bg" id="founders" data-nav="light">
           <LiveBackground variant="forest" density={0.75} />
           <div className="wrap">
             <Reveal className="center">
@@ -407,7 +386,7 @@ export default function Home() {
         </section>
 
         {/* ---------- Testimonials ---------- */}
-        <section className="content content--sand has-live-bg" id="reviews">
+        <section className="content content--sand has-live-bg" id="reviews" data-nav="light">
           <LiveBackground variant="forest" density={0.7} />
           <div className="wrap">
             <Reveal className="center">
@@ -460,76 +439,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ---------- Finale / Contact ---------- */}
-        <section className="finale has-live-bg" id="visit">
-          <LiveBackground variant="forest" density={1} />
-          <Reveal className="finale-inner">
-            <p className="eyebrow eyebrow--gold">DOLPHIN · AQUARIUM &amp; PETS</p>
-            <Words className="display display--xl grad-gold" text="Find your companion." />
-            <p className="lede lede--dark">
-              Step into Dolphin Aquarium &amp; Pets in Madgaon, Goa — and meet them in person.
-            </p>
-            <div className="finale-actions">
-              <Magnetic strength={0.3}>
-                <motion.a
-                  className="btn btn--brand"
-                  href="https://wa.me/919953858521"
-                  target="_blank"
-                  rel="noopener"
-                  whileHover={{ y: -3, boxShadow: "0 20px 44px rgba(216,32,24,.45)" }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Chat on WhatsApp
-                </motion.a>
-              </Magnetic>
-              <Magnetic strength={0.3}>
-                <motion.a
-                  className="btn btn--ghost"
-                  href="https://www.google.com/maps?q=Dolphin+Aquarium+and+Pets+Madgaon+Goa"
-                  target="_blank"
-                  rel="noopener"
-                  whileHover={{ y: -3, borderColor: "#2a2118" }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Get directions
-                </motion.a>
-              </Magnetic>
-            </div>
-
-            <div className="visit-details">
-              <div className="vd">
-                <span className="vd-k">Showroom</span>
-                <span className="vd-v">
-                  Shop No G-4, Apollo Apt, Navelim Flyover, Sanscar Society, Madgaon, Shirvodem, Goa
-                  403601
-                </span>
-              </div>
-              <div className="vd">
-                <span className="vd-k">Hours</span>
-                <span className="vd-v">Mon–Sat 9:00 AM – 9:00 PM · Sun 9:30 AM – 2:00 PM</span>
-              </div>
-              <div className="vd">
-                <span className="vd-k">Call</span>
-                <span className="vd-v">
-                  <a href="tel:+919953858521">+91 99538 58521</a>
-                </span>
-              </div>
-              <div className="vd">
-                <span className="vd-k">Follow</span>
-                <span className="vd-v">
-                  <a href="https://www.instagram.com/dolphinaquariumandpets/" target="_blank" rel="noopener">Instagram</a>
-                  {" · "}
-                  <a href="https://www.facebook.com/dolphinaquariumandpets" target="_blank" rel="noopener">Facebook</a>
-                </span>
-              </div>
-            </div>
-          </Reveal>
-          <footer className="foot">
-            © {new Date().getFullYear()} Dolphin Aquarium &amp; Pets · Madgaon, Goa · Ethically
-            sourced. Lovingly raised.
-          </footer>
-        </section>
+        <HeartSection />
       </main>
+      <SiteFooter />
+      <WhatsAppFloat />
     </>
   );
 }

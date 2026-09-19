@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
+import WhatsAppFloat from "../../components/WhatsAppFloat";
 import LiveBackground from "../../components/LiveBackground";
 import { ScrollProgress, Words } from "../../components/motionKit";
 
@@ -73,6 +74,7 @@ export default function CareGuides() {
         </section>
       </main>
       <SiteFooter />
+      <WhatsAppFloat />
     </>
   );
 }

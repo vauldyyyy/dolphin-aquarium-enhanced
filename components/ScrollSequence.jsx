@@ -59,6 +59,7 @@ export default function ScrollSequence({
   loaded = 0,
   heightVh = 460,
   theme = "dark",
+  navTheme,
   bg = "#050505",
   beats = [],
 }) {
@@ -139,9 +140,15 @@ export default function ScrollSequence({
       ref={sectionRef}
       className={`chapter chapter--${theme === "dark" ? "dark" : "warm"}`}
       style={{ height: `${heightVh}vh` }}
+      data-nav={navTheme || (theme === "dark" ? "dark" : "light")}
     >
       <div className="sticky">
         <canvas ref={canvasRef} className="seq-canvas" />
+        {loaded < Math.min(24, count) && (
+          <div className="seq-loading" aria-hidden="true">
+            <i /> Loading footage {Math.round((loaded / count) * 100)}%
+          </div>
+        )}
         <div className={`vignette vignette--${theme === "dark" ? "dark" : "warm"}`} />
         <div className="beats">
           {beats.map((b, i) => (

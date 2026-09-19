@@ -1,35 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import Icon from "./Icon";
 
 const LINKS = [
-  { href: "/#aquatics", label: "Aquatics" },
-  { href: "/#companions", label: "Companions" },
+  { href: "/", label: "Home" },
+  { href: "/#our-world", label: "Our world" },
   { href: "/#services", label: "Services" },
   { href: "/#founders", label: "Founders" },
   { href: "/shop", label: "Shop" },
-  { href: "/care-guides", label: "Care Guides" },
-  { href: "/#visit", label: "Contact" },
+  { href: "/care-guides", label: "Care guides" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const EASE = [0.22, 0.61, 0.36, 1];
+const MotionLink = motion(Link);
 
-export default function Nav({ staticLight = false, watchId = "companions" }) {
+/**
+ * The theme follows whichever section sits under the bar: every major
+ * section declares data-nav="dark" | "light". Pages without scroll-driven
+ * sections pass `staticLight`.
+ */
+export default function Nav({ staticLight = false }) {
   const { scrollY } = useScroll();
   const [solid, setSolid] = useState(staticLight);
   const [light, setLight] = useState(staticLight);
   const [open, setOpen] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (v) => {
+  const update = useCallback(() => {
     if (staticLight) return;
-    setSolid(v > 40);
-    const el = document.getElementById(watchId);
-    if (el) setLight(el.getBoundingClientRect().top <= window.innerHeight * 0.5);
-  });
+    setSolid(window.scrollY > 40);
+    const probe = 32; // px below the top edge, i.e. under the bar
+    let theme = "dark";
+    document.querySelectorAll("[data-nav]").forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) theme = el.getAttribute("data-nav");
+    });
+    setLight(theme === "light");
+  }, [staticLight]);
 
-  const ink = light ? "rgba(42,33,24,.62)" : "rgba(255,255,255,.62)";
+  useMotionValueEvent(scrollY, "change", update);
+  useEffect(() => { update(); }, [update]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  const ink = light ? "rgba(42,33,24,.66)" : "rgba(247,244,233,.76)";
   const inkStrong = light ? "#2a2118" : "#ffffff";
 
   return (
@@ -39,29 +61,33 @@ export default function Nav({ staticLight = false, watchId = "companions" }) {
         initial={false}
         animate={{
           backgroundColor: solid
-            ? light
-              ? "rgba(246,241,232,0.72)"
-              : "rgba(5,5,5,0.6)"
-            : "rgba(5,5,5,0)",
+            ? light ? "rgba(246,241,232,0.78)" : "rgba(3,35,51,0.72)"
+            : "rgba(3,35,51,0)",
           borderBottomColor: solid
-            ? light
-              ? "rgba(42,33,24,0.1)"
-              : "rgba(255,255,255,0.08)"
-            : "rgba(255,255,255,0)",
-          backdropFilter: solid ? "blur(14px) saturate(140%)" : "blur(0px)",
+            ? light ? "rgba(42,33,24,0.1)" : "rgba(182,236,245,0.14)"
+            : "rgba(182,236,245,0)",
+          backdropFilter: solid ? "blur(16px) saturate(140%)" : "blur(0px)",
         }}
         transition={{ duration: 0.5, ease: EASE }}
       >
         <div className="nav-inner">
-          <Link href="/" aria-label="Dolphin Aquarium & Pets — home">
+          <Link href="/" className="nav-brand" aria-label="Dolphin Aquarium & Pets — home">
             <motion.img
               className="nav-logo-img"
-              src="/assets/logo-mark.png"
+              src="/assets/logo-white.png"
               alt="Dolphin Aquarium & Pets"
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: EASE }}
-              whileHover={{ scale: 1.04 }}
+              initial={false}
+              animate={{ opacity: light ? 0 : 1 }}
+              transition={{ duration: 0.45, ease: EASE }}
+            />
+            <motion.img
+              className="nav-logo-img nav-logo-img--over"
+              src="/assets/logo-mark.png"
+              alt=""
+              aria-hidden="true"
+              initial={false}
+              animate={{ opacity: light ? 1 : 0 }}
+              transition={{ duration: 0.45, ease: EASE }}
             />
           </Link>
 
@@ -78,24 +104,17 @@ export default function Nav({ staticLight = false, watchId = "companions" }) {
             ))}
           </motion.nav>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <motion.a
-              className="nav-cta"
-              href="https://wa.me/919953858521"
-              target="_blank"
-              rel="noopener"
-              animate={{
-                background: "linear-gradient(120deg,#d82018,#f2542d)",
-                boxShadow: light
-                  ? "0 8px 24px rgba(216,32,24,.28)"
-                  : "0 8px 24px rgba(216,32,24,.40)",
-              }}
-              whileHover={{ scale: 1.04, y: -1 }}
+          <div className="nav-actions">
+            <MotionLink
+              className="nav-cta nav-cta--gold"
+              href="/#visit"
+              whileHover={{ y: -2, boxShadow: "0 0 36px rgba(236,210,136,.40)" }}
               whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.3, ease: EASE }}
             >
-              Visit the store
-            </motion.a>
+              <Icon name="pin" size={16} />
+              Visit us
+              <Icon name="arrow" size={16} className="nav-cta-arrow" />
+            </MotionLink>
 
             <motion.button
               className="burger"
@@ -132,7 +151,7 @@ export default function Nav({ staticLight = false, watchId = "companions" }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="mobile-menu"
+            className={`mobile-menu${light ? "" : " mobile-menu--dark"}`}
             initial={{ opacity: 0, y: -18 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -18 }}
@@ -150,6 +169,9 @@ export default function Nav({ staticLight = false, watchId = "companions" }) {
                 </Link>
               </motion.div>
             ))}
+            <Link className="mobile-menu-cta" href="/#visit" onClick={() => setOpen(false)}>
+              <Icon name="pin" size={16} /> Visit us
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
