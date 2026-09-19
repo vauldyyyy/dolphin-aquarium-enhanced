@@ -9,6 +9,8 @@ import HeartSection from "../components/HeartSection";
 import SiteFooter from "../components/SiteFooter";
 import WhatsAppFloat from "../components/WhatsAppFloat";
 import LiveBackground from "../components/LiveBackground";
+import GardenBackground from "../components/GardenBackground";
+import CompanionsGallery from "../components/CompanionsGallery";
 import { useImageSequence } from "../components/useImageSequence";
 import {
   ScrollProgress,
@@ -230,40 +232,12 @@ export default function Home() {
           beats={gardenBeats}
         />
 
-        {/* ---------- Companions gallery (real photos) ---------- */}
-        <section className="content content--cream has-live-bg" id="gallery" data-nav="light">
-          <LiveBackground variant="forest" density={0.9} />
-          <div className="wrap">
-            <Reveal className="center">
-              <p className="eyebrow eyebrow--gold">A few of our companions</p>
-              <Words className="display dark" text="Raised with love" />
-              <p className="content-lede">
-                Hand-selected dogs, cats and small pets — healthy, socialised and ready for home.
-              </p>
-            </Reveal>
-            <div className="gallery">
-              {[
-                ["/assets/golden-retriever.jpg", "Golden Retriever"],
-                ["/assets/husky.jpg", "Siberian Husky"],
-                ["/assets/persian-cat.jpg", "Persian Cat"],
-                ["/assets/cocker-spaniel.jpg", "Cocker Spaniel"],
-                ["/assets/dalmatian.jpg", "Dalmatian"],
-                ["/assets/british-cat.jpg", "British Shorthair"],
-                ["/assets/hamster.jpg", "Hamster"],
-                ["/assets/saint-bernard.jpg", "Saint Bernard"],
-              ].map(([src, name], i) => (
-                <Reveal as={motion.figure} key={name} delay={(i % 4) * 0.08}>
-                  <img src={src} alt={name} loading="lazy" />
-                  <figcaption>{name}</figcaption>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* ---------- Companions gallery ---------- */}
+        <CompanionsGallery />
 
         {/* ---------- Services ---------- */}
         <section className="content content--cream has-live-bg" id="services" data-nav="light">
-          <LiveBackground variant="forest" density={0.8} />
+          <GardenBackground leaves={6} paws={3} pollen={0.8} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">What we offer</p>
@@ -369,7 +343,7 @@ export default function Home() {
 
         {/* ---------- Founders ---------- */}
         <section className="content content--cream has-live-bg" id="founders" data-nav="light">
-          <LiveBackground variant="forest" density={0.75} />
+          <GardenBackground leaves={5} paws={3} pollen={0.7} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Leadership</p>
@@ -416,7 +390,7 @@ export default function Home() {
 
         {/* ---------- Testimonials ---------- */}
         <section className="content content--sand has-live-bg" id="reviews" data-nav="light">
-          <LiveBackground variant="forest" density={0.7} />
+          <GardenBackground leaves={6} paws={4} pollen={0.7} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Trusted by industry leaders</p>

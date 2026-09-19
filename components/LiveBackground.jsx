@@ -6,7 +6,8 @@ import { useEffect, useRef } from "react";
  * Canvas-driven living background.
  *   variant="aqua"   → deep water, caustic light shafts, rising bubbles, plankton
  *   variant="forest" → warm sunlight, drifting pollen motes, soft light shafts
- * Pauses automatically when scrolled out of view and respects reduced motion.
+ * Pauses automatically when scrolled out of view. Under reduced motion it keeps
+ * drifting, but at a calmer pace ("reduce", not "freeze").
  */
 export default function LiveBackground({ variant = "aqua", density = 1, className = "" }) {
   const ref = useRef(null);
@@ -16,6 +17,7 @@ export default function LiveBackground({ variant = "aqua", density = 1, classNam
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const speed = reduce ? 0.4 : 1;
 
     let W = 0, H = 0, dpr = 1, t = 0, raf = 0;
     let bits = [];
@@ -147,10 +149,10 @@ export default function LiveBackground({ variant = "aqua", density = 1, classNam
         raf = requestAnimationFrame(step);
         return;
       }
-      t += 16;
+      t += 16 * speed;
       bits.forEach((p) => {
-        p.y -= p.vy;
-        if (p.vx) p.x += p.vx;
+        p.y -= p.vy * speed;
+        if (p.vx) p.x += p.vx * speed;
         if (isAqua) {
           if (p.y + p.r < -10) {
             p.y = H + p.r + 10;
@@ -175,7 +177,7 @@ export default function LiveBackground({ variant = "aqua", density = 1, classNam
     );
     io.observe(canvas);
 
-    if (!reduce) raf = requestAnimationFrame(step);
+    raf = requestAnimationFrame(step);
 
     return () => {
       cancelAnimationFrame(raf);

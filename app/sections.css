@@ -240,8 +240,12 @@
   .vw-hours div { grid-template-columns: auto 1fr; column-gap: 14px; }
   .vw-hours dt, .vw-hours dd { white-space: nowrap; }
 }
+/* reduced motion: keep the calm ambient drift, just slower; no pointer parallax */
 @media (prefers-reduced-motion: reduce) {
-  .vw-rays, .vw-scene img, .vw-reef, .vw-leaves { animation: none !important; }
+  .vw-rays { animation-duration: 36s; }
+  .vw-scene img { animation-duration: 40s; }
+  .vw-reef { animation-duration: 22s; }
+  .vw-leaves--tl, .vw-leaves--r { animation-duration: 18s; }
   .vw-scene { transform: none !important; }
 }
 
@@ -268,3 +272,103 @@
   transition: background .2s, transform .2s;
 }
 .hs-btn:hover { background: rgba(237,207,142,.1); transform: translateY(-2px); }
+
+/* =====================================================================
+   Garden background — drifting blooms, falling leaves, rising paws
+   ===================================================================== */
+.garden-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.garden-blob { position: absolute; border-radius: 50%; opacity: .6; will-change: transform; }
+.garden-blob--sage  { width: min(46vw, 720px); aspect-ratio: 1; left: -10%; top: -14%; background: radial-gradient(circle, rgba(143,178,120,.7), rgba(143,178,120,0) 68%); }
+.garden-blob--gold  { width: min(40vw, 640px); aspect-ratio: 1; right: -8%; top: 22%; background: radial-gradient(circle, rgba(233,199,124,.68), rgba(233,199,124,0) 68%); }
+.garden-blob--peach { width: min(36vw, 560px); aspect-ratio: 1; left: 32%; bottom: -20%; background: radial-gradient(circle, rgba(243,190,150,.55), rgba(243,190,150,0) 68%); }
+.garden-leaf { position: absolute; top: 0; filter: drop-shadow(0 6px 8px rgba(60,50,20,.18)); will-change: transform, opacity; }
+.garden-paw { position: absolute; will-change: transform, opacity; }
+
+/* =====================================================================
+   Companions gallery — "Raised with love"
+   ===================================================================== */
+.gal { background: var(--cream); color: var(--espresso); padding: var(--section-y) var(--gutter); }
+.gal-head { max-width: 780px; margin: 0 auto; text-align: center; }
+.gal-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .34em; color: #b07d22; }
+.gal-title {
+  margin: 18px 0 0; font-family: var(--font-fraunces), Georgia, serif; font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.05; letter-spacing: -.02em; color: var(--espresso);
+}
+.gal-flourish { display: block; width: 200px; height: 22px; margin: 10px auto 0; }
+.gal-flourish path { fill: none; stroke: #c99a4a; stroke-width: 2.4; stroke-linecap: round; }
+.gal-lede { max-width: 56ch; margin: 16px auto 0; font-size: clamp(1.02rem, 1.3vw, 1.2rem); line-height: 1.7; color: rgba(42,33,24,.72); }
+
+.gal-filters {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 30px; padding: 6px;
+  border-radius: 999px; border: 1px solid rgba(42,33,24,.1); background: rgba(255,255,255,.6);
+  box-shadow: 0 10px 30px rgba(42,33,24,.08); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.gal-chip {
+  position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px;
+  border: 0; border-radius: 999px; background: transparent; cursor: pointer;
+  font: inherit; font-size: 15px; font-weight: 600; color: rgba(42,33,24,.72); transition: color .25s;
+}
+.gal-chip:hover { color: var(--espresso); }
+.gal-chip.is-on { color: #10263a; }
+.gal-chip:focus-visible { outline: 2px solid #c99a4a; outline-offset: 3px; }
+.gal-pill {
+  position: absolute; inset: 0; z-index: 0; border-radius: 999px;
+  background: linear-gradient(120deg,#f8e5b0 0%,#e6c677 45%,#f3dda2 70%,#c4a35d 100%);
+  box-shadow: 0 6px 18px rgba(201,154,74,.35), inset 0 1px 1px #fff8d7;
+}
+.gal-chip-label, .gal-count { position: relative; z-index: 1; }
+.gal-count { display: grid; place-items: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; font-size: 12px; background: rgba(42,33,24,.08); }
+.gal-chip.is-on .gal-count { background: rgba(16,38,58,.12); }
+
+.gal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: clamp(40px, 5vw, 60px); }
+@media (max-width: 1280px) { .gal-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 960px)  { .gal-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px)  { .gal-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+
+.pet { position: relative; }
+.pet-card {
+  position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 3 / 4; border-radius: 22px;
+  background: #ddd4c2; box-shadow: 0 18px 44px rgba(42,33,24,.18);
+}
+.pet-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pet-glare { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light; }
+.pet-tag {
+  position: absolute; top: 14px; left: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.28);
+  background: rgba(16,24,20,.38); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-size: 12px; font-weight: 600; color: #fff;
+}
+.pet-info {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 60px 18px 18px; color: #fff;
+  background: linear-gradient(180deg, transparent 0%, rgba(12,18,14,.55) 40%, rgba(12,18,14,.85) 100%);
+}
+.pet-info h3 { margin: 0; font-family: var(--font-fraunces), Georgia, serif; font-size: clamp(1.1rem, 1.35vw, 1.35rem); font-weight: 600; }
+.pet-more { overflow: hidden; }
+.pet-more p { margin: 6px 0 0; font-size: 13.5px; color: rgba(255,255,255,.84); }
+.pet-more a {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 7px 13px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; color: #10263a; background: linear-gradient(120deg,#f8e5b0,#e6c677);
+}
+
+.gal-cta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
+  margin-top: clamp(44px, 5vw, 64px); padding: 26px 30px; border-radius: 22px;
+  border: 1px solid rgba(42,33,24,.1); background: rgba(255,255,255,.62);
+  box-shadow: 0 16px 40px rgba(42,33,24,.08); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.gal-cta p { margin: 0; font-family: var(--font-fraunces), Georgia, serif; font-size: clamp(1.2rem, 1.8vw, 1.6rem); color: var(--espresso); }
+.gal-cta p span { display: block; margin-top: 4px; font-family: var(--font-inter), sans-serif; font-size: 15px; color: rgba(42,33,24,.66); }
+.gal-cta-btn {
+  display: inline-flex; align-items: center; gap: 12px; padding: 16px 28px; border-radius: 999px;
+  font-size: 16px; font-weight: 600; color: #10263a; border: 1px solid #f9ebbf;
+  background: linear-gradient(120deg,#f8e5b0 0%,#e6c677 45%,#f3dda2 70%,#c4a35d 100%);
+  box-shadow: 0 10px 28px rgba(201,154,74,.3), inset 0 1px 1px #fff8d7;
+}
+@media (max-width: 640px) {
+  .gal-chip { padding: 9px 14px; font-size: 14px; }
+  .pet-tag { top: 10px; left: 10px; font-size: 11px; }
+  .pet-info { padding: 44px 12px 12px; }
+  .pet-more p { display: none; }
+  .pet-more a { padding: 6px 10px; font-size: 12px; }
+  .gal-cta { flex-direction: column; align-items: flex-start; }
+}

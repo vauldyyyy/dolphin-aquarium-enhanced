@@ -7,7 +7,8 @@ import { BUSINESS } from "../lib/business";
    Ocean engine — ported from the package's scripts/ocean.js.
    Canvas bubbles, stylised fish, caustic lines, click ripples and
    pointer parallax (via --px/--py). Capped FPS; pauses off-screen,
-   when the tab is hidden, and under reduced motion.
+   when the tab is hidden. Under reduced motion it runs at a calmer pace
+   with no pointer parallax.
 ------------------------------------------------------------------ */
 export default function useOcean(rootRef, canvasRef, activeRef, engineRef) {
   useEffect(() => {
@@ -22,7 +23,8 @@ export default function useOcean(rootRef, canvasRef, activeRef, engineRef) {
     const pointerFine = window.matchMedia("(pointer: fine)");
     let width = 0, height = 0, bubbles = [], fishes = [], ripples = [];
     let raf = 0, last = 0, elapsed = 0, inView = true;
-    let active = activeRef.current && !reduce.matches;
+    let active = activeRef.current;
+    const speed = reduce.matches ? 0.45 : 1;
     let targetX = 0, targetY = 0, px = 0, py = 0;
     const rand = (min, max) => min + Math.random() * (max - min);
     const maxFps = Math.min(60, Math.max(15, Number(cfg.maxFps) || 30));
@@ -117,7 +119,7 @@ export default function useOcean(rootRef, canvasRef, activeRef, engineRef) {
       if (!active || !inView || document.hidden) { raf = 0; return; }
       raf = requestAnimationFrame(tick);
       if (now - last < 1000 / maxFps) return;
-      const dt = last ? Math.min((now - last) / 1000, 0.06) : 0.033;
+      const dt = (last ? Math.min((now - last) / 1000, 0.06) : 0.033) * speed;
       last = now;
       elapsed += dt;
       px += (targetX - px) * 0.06;
@@ -139,7 +141,7 @@ export default function useOcean(rootRef, canvasRef, activeRef, engineRef) {
 
     engineRef.current = {
       setActive(value) {
-        active = Boolean(value) && !reduce.matches;
+        active = Boolean(value);
         sync();
         if (!active) {
           targetX = 0;
@@ -151,7 +153,7 @@ export default function useOcean(rootRef, canvasRef, activeRef, engineRef) {
     };
 
     const onMove = (e) => {
-      if (!pointerFine.matches || !active || !inView) return;
+      if (!pointerFine.matches || !active || !inView || reduce.matches) return;
       targetX = (e.clientX / window.innerWidth - 0.5) * -17;
       targetY = (e.clientY / window.innerHeight - 0.5) * -10;
     };
