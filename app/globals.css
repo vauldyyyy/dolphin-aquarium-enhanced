@@ -486,3 +486,6 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 .scene-scrim--dark { background: rgba(4, 16, 30, var(--s)); }
 .scene-scrim--light { background: rgba(246, 241, 232, var(--s)); }
 .scene-scrim--visit { background: linear-gradient(90deg, rgba(2, 18, 34, calc(var(--s) + .22)) 0%, rgba(2, 18, 34, var(--s)) 38%, rgba(2, 18, 34, 0) 68%); }
+/* a painted scene replaces the CSS ambience layers of its section */
+:where(.amb-ocean, .amb-home, .amb-garden):has(> .scene)::before,
+:where(.amb-ocean, .amb-home, .amb-garden):has(> .scene)::after { display: none; }

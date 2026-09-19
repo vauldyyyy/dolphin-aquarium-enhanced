@@ -24,14 +24,15 @@ const PRESETS = {
     ],
   },
   gallery: {
-    plate: "gallery-plate", front: "gallery-front", scrim: "light", strength: 0.14, kb: 26, drift: 2.5,
+    // the supplied gallery-front is a full-frame haze, not corner blossoms — it washes the section out
+    plate: "gallery-plate", scrim: "light", strength: 0.1, kb: 26, drift: 2.5, pos: "50% 86%",
     sprites: [
       { file: "gallery-sprite-butterfly", n: 2, path: "loop", w: [5, 7], top: [22, 58], dur: [18, 26], o: 0.95 },
       { file: "gallery-sprite-dandelion-seed", n: 5, path: "rise", w: [2.5, 4], top: [0, 0], dur: [20, 30], o: 0.8 },
     ],
   },
   services: {
-    plate: "services-plate", front: "services-front", scrim: "light", strength: 0.22, kb: 26,
+    plate: "services-plate", front: "services-front", scrim: "light", strength: 0.22, kb: 26, pos: "50% 60%",
     effects: { variant: "forest", density: 0.5 },
     sprites: [],
   },
@@ -139,6 +140,7 @@ export default function SceneLayers({ preset }) {
         alt=""
         loading="lazy"
         decoding="async"
+        style={{ objectPosition: p.pos || "50% 50%" }}
         animate={near ? { scale: [1.03, 1.03 + (p.drift ? 0.01 : 0.045)], x: p.drift ? ["-1.2%", "1.2%"] : ["0%", "-0.8%"] } : undefined}
         transition={{ duration: kb, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
       />
@@ -153,6 +155,7 @@ export default function SceneLayers({ preset }) {
           alt=""
           loading="lazy"
           decoding="async"
+          style={{ objectPosition: p.pos || "50% 50%" }}
           animate={near ? { rotate: [-0.7, 0.7], scale: [1.05, 1.07] } : undefined}
           transition={{ duration: 11 * (calm ? 1.6 : 1), repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
         />
