@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Icon from "./Icon";
+import SectionVideo from "./SectionVideo";
 import useOcean from "./useOcean";
 import {
   BUSINESS,
@@ -82,6 +83,7 @@ export default function VisitWorld() {
     <section className="vw" id="visit" ref={rootRef} data-nav="light" aria-labelledby="vw-title">
       {/* ---------------- living backdrop ---------------- */}
       <div className="vw-bg" aria-hidden="true">
+        <SectionVideo name="visit" scrim="none" position="60% 50%" />
         <div className="vw-water" />
         <div className="vw-rays" />
         <div className="vw-arch" />

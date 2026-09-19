@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import SectionVideo from "./SectionVideo";
 
 export default function SiteFooter() {
   return (
     <footer className="site-foot" data-nav="dark">
+      <SectionVideo name="footer" scrim="dark" scrimStrength={0.6} opacity={0.7} />
       <div className="wrap">
         <div>
           <div className="logo">DOLPHIN</div>

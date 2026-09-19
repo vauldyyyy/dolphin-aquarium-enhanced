@@ -460,3 +460,14 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 .svc-card figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 14px 10px; font-size: .88rem; font-weight: 600; color: #fff; background: linear-gradient(180deg, transparent, rgba(10,20,26,.78)); }
 .svc-card:hover { box-shadow: 0 16px 36px rgba(42,33,24,.2); }
 .svc-cards:hover .svc-cards-track { animation-play-state: paused; }
+
+/* ---------- Section video backgrounds (components/SectionVideo.jsx) ---------- */
+.sv { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.sv-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.sv-scrim { position: absolute; inset: 0; }
+:where(section, footer):has(> .sv) { isolation: isolate; }
+.transition > .sv { position: absolute; }
+.transition:has(> .sv)::before { display: none; }
+.site-foot { position: relative; overflow: hidden; }
+/* the visit video replaces the painted water, arch, still scene and rays */
+.vw-bg:has(> .sv) :is(.vw-water, .vw-arch, .vw-scene, .vw-rays) { display: none; }

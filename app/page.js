@@ -7,6 +7,7 @@ import Reveal from "../components/Reveal";
 import ScrollSequence from "../components/ScrollSequence";
 import VisitWorld from "../components/VisitWorld";
 import ForestLoader from "../components/ForestLoader";
+import SectionVideo from "../components/SectionVideo";
 import HeartSection from "../components/HeartSection";
 import SiteFooter from "../components/SiteFooter";
 import WhatsAppFloat from "../components/WhatsAppFloat";
@@ -191,7 +192,7 @@ export default function Home() {
 
         {/* ---------- Interlude ---------- */}
         <section className="interlude has-live-bg amb-ocean" id="care" data-nav="dark">
-          <LiveBackground variant="aqua" density={1.1} />
+          <SectionVideo name="care" scrim="dark" scrimStrength={0.45} fallback={<LiveBackground variant="aqua" density={1.1} />} />
           <div className="wrap">
             <Reveal>
               <p className="interlude-eyebrow">A LIVING COLLECTION, CARED FOR SINCE 1992</p>
@@ -213,6 +214,7 @@ export default function Home() {
 
         {/* ---------- Transition ---------- */}
         <section className="transition" data-nav="dark">
+          <SectionVideo name="transition" mode="once" scrim="dark" scrimStrength={0.35} />
           <Reveal>
             <p className="transition-line">
               But a home isn&apos;t complete with fins alone.
@@ -239,7 +241,7 @@ export default function Home() {
 
         {/* ---------- Services ---------- */}
         <section className="content content--cream has-live-bg amb-home" id="services" data-nav="light">
-          <GardenBackground leaves={6} paws={3} pollen={0.8} />
+          <SectionVideo name="services" scrim="light" scrimStrength={0.6} fallback={<GardenBackground leaves={6} paws={3} pollen={0.8} />} />
           <div className="amb-motes" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
           <div className="wrap">
             <Reveal className="center">
@@ -336,7 +338,7 @@ export default function Home() {
 
         {/* ---------- Why us ---------- */}
         <section className="content content--espresso has-live-bg amb-ocean" id="why" data-nav="dark">
-          <LiveBackground variant="aqua" density={1.25} />
+          <SectionVideo name="why" scrim="dark" scrimStrength={0.55} fallback={<LiveBackground variant="aqua" density={1.25} />} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Why us</p>
@@ -376,7 +378,7 @@ export default function Home() {
 
         {/* ---------- Founders ---------- */}
         <section className="content content--cream has-live-bg amb-home" id="founders" data-nav="light">
-          <GardenBackground leaves={5} paws={3} pollen={0.7} />
+          <SectionVideo name="founders" scrim="light" scrimStrength={0.55} fallback={<GardenBackground leaves={5} paws={3} pollen={0.7} />} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Leadership</p>
@@ -423,7 +425,7 @@ export default function Home() {
 
         {/* ---------- Clients ---------- */}
         <section className="content content--sand has-live-bg amb-home" id="clients" data-nav="light">
-          <GardenBackground leaves={6} paws={4} pollen={0.7} />
+          <SectionVideo name="clients" scrim="light" scrimStrength={0.5} fallback={<GardenBackground leaves={6} paws={4} pollen={0.7} />} />
           <div className="wrap">
             <Reveal className="center">
               <p className="eyebrow eyebrow--gold">Trusted by industry leaders</p>

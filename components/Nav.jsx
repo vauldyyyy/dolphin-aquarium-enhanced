@@ -16,7 +16,7 @@ const LINKS = [
 ];
 
 const EASE = [0.22, 0.61, 0.36, 1];
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 /**
  * The theme follows whichever section sits under the bar: every major

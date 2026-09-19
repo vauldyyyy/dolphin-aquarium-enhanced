@@ -145,7 +145,8 @@ export default function ForestLoader({ progress = 0, minMs = 3200, demo = false 
       const pad = 18;
       const left = Math.max(pad, ox + BRANCH.x0 * s);
       const right = Math.min(W - pad, ox + BRANCH.x1 * s);
-      setBar({ left, width: right - left, top: oy + BRANCH.cy * s, h: Math.max(10, BRANCH.h * s) });
+      // too little of the branch on screen to sit a vine on (very wide, short windows)
+      setBar(right - left < 60 ? null : { left, width: right - left, top: oy + BRANCH.cy * s, h: Math.max(10, BRANCH.h * s) });
     };
     place();
     window.addEventListener("resize", place, { passive: true });

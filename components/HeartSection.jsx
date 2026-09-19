@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionVideo from "./SectionVideo";
 import Icon from "./Icon";
 import LiveBackground from "./LiveBackground";
 
@@ -14,7 +15,7 @@ const rise = {
 export default function HeartSection() {
   return (
     <section className="hs has-live-bg" id="heart" data-nav="dark" aria-labelledby="hs-title">
-      <LiveBackground variant="aqua" density={0.9} />
+      <SectionVideo name="heart" scrim="dark" scrimStrength={0.5} position="30% 70%" fallback={<LiveBackground variant="aqua" density={0.9} />} />
       <motion.div
         className="wrap hs-inner"
         initial="hidden"
