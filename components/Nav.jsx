@@ -7,11 +7,11 @@ import Icon from "./Icon";
 
 const LINKS = [
   { href: "/", label: "Home" },
-  { href: "/#our-world", label: "Our world" },
   { href: "/#services", label: "Services" },
+  { href: "/#why", label: "Why Us" },
   { href: "/#founders", label: "Founders" },
+  { href: "/#reviews", label: "Clients" },
   { href: "/shop", label: "Shop" },
-  { href: "/care-guides", label: "Care guides" },
   { href: "/contact", label: "Contact" },
 ];
 

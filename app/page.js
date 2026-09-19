@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";
 import Reveal from "../components/Reveal";
 import ScrollSequence from "../components/ScrollSequence";
-import LivingHero from "../components/LivingHero";
+import VisitWorld from "../components/VisitWorld";
 import HeartSection from "../components/HeartSection";
 import SiteFooter from "../components/SiteFooter";
 import WhatsAppFloat from "../components/WhatsAppFloat";
@@ -29,12 +29,12 @@ const aquaticBeats = [
     range: [0, 0.2],
     content: (
       <>
-        <p className="eyebrow eyebrow--aqua">CHAPTER ONE · AQUATICS</p>
-        <h2 className="display grad-aqua">
+        <p className="eyebrow eyebrow--aqua">DOLPHIN · AQUARIUM &amp; PETS · SINCE 1992</p>
+        <h1 className="display grad-aqua">
           Living art,
           <br />
           in motion.
-        </h2>
+        </h1>
         <p className="lede">
           Meet the chili red arowana — the crowned centrepiece of our aquatic collection.
         </p>
@@ -141,14 +141,38 @@ export default function Home() {
   // Garden starts loading once the aquatic chapter has fully arrived
   const garden = useImageSequence("/frames/garden", GARDEN_COUNT, aquatic.done);
 
+  // Brief intro while the opening frames buffer; the sequence falls back to the
+  // nearest decoded frame, so the remainder streams in behind it.
+  const BUFFER = 30;
+  const ready = aquatic.loaded >= BUFFER || aquatic.done;
+  const pct = Math.min(100, Math.round((aquatic.loaded / BUFFER) * 100));
+
   return (
     <>
+      <AnimatePresence>
+        {!ready && (
+          <motion.div
+            className="loader"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: EASE }}
+          >
+            <div className="loader-inner">
+              <img className="loader-logo" src="/assets/logo-white.png" alt="Dolphin Aquarium & Pets" />
+              <div className="loader-sub">Since 1992 · Madgaon, Goa</div>
+              <div className="loader-bar">
+                <motion.i animate={{ width: `${pct}%` }} transition={{ ease: EASE }} />
+              </div>
+              <div className="loader-pct">{pct}%</div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <ScrollProgress />
       <Nav />
 
       <main id="main">
-        <LivingHero />
-
         {/* ---------- Chapter 1 — Aquatic ---------- */}
         <ScrollSequence
           id="aquatics"
@@ -440,6 +464,7 @@ export default function Home() {
         </section>
 
         <HeartSection />
+        <VisitWorld />
       </main>
       <SiteFooter />
       <WhatsAppFloat />

@@ -16,29 +16,34 @@ you scroll, then the page flows into the real business content.
 | **Transition** | Dark → cream gradient band |
 | **Chapter 2 — Companions** | 300-frame warm garden sequence (dogs, cats, birds) |
 | **Services / Why Us / Founders / Reviews** | Real business content, editorial styling |
-| **Finale** | WhatsApp + directions, address, hours, phone, socials |
+| **The heart of Dolphin** | Short emotional band leading into the visit section |
+| **More Than Pets (visit)** | Location card with map, visit cards, live open/closed badge, feature strip |
 
 Plus dedicated routes: `/shop`, `/care-guides`, `/contact`.
 
-## Living Aquarium hero (integrated package)
+## "More Than Pets" visit section
 
-The homepage opens with the **Living Aquarium** design (from the supplied
-`dolphin-aquarium.zip`), ported natively into React rather than embedded as an
-iframe, so it shares the site's nav, fonts and scroll:
+A full-width section near the end of the homepage (after "The heart of
+Dolphin"), built from the supplied design concept — **not** the page hero; the
+arowana story still opens the page.
 
-- `components/LivingHero.jsx` — hero, glass location card (click-to-load Google
-  Maps), "Plan your visit" cards with a live **Open now / Closed now** badge
-  (evaluated in Goa time), and the "Find your kind of wonder" cards. Includes the
-  package's canvas ocean (bubbles, fish silhouettes, caustics, click ripples,
-  pointer parallax) and the **Motion** / **Moonlight** toggles (saved locally).
-- `components/HeartSection.jsx` — "The heart of Dolphin" closing band.
-- `components/WhatsAppFloat.jsx` — floating "Say hello" button on every page.
-- `components/Icon.jsx` — the package's icon set as inline SVG.
-- `app/living.css` — the package stylesheet, scoped under `.dolphin-site`.
+- `components/VisitWorld.jsx` — "EST. EXCELLENCE" headline block, *Explore Our
+  World* / *Watch Our Story* (scrolls to the story), handwritten "Inspiring a
+  kinder brighter world", the **Our Location** card with the embedded Google Map
+  (lazy-loaded), the three visit cards with a live **Open now / Closed now**
+  badge (Goa time), and the feature strip with the "Goa" signature.
+- Living backdrop: dolphin-and-child aquarium artwork with slow drift and pointer
+  parallax, light rays, swaying coral and leaves, glowing wave lines that draw in,
+  and a canvas ocean (bubbles, fish, caustics, click ripples) from
+  `components/useOcean.js`.
+- `app/sections.css` — styles for this section and the Heart band. Layout was
+  measured against the concept at 1600×900 and matched to within a few pixels.
+- `components/HeartSection.jsx`, `components/WhatsAppFloat.jsx`,
+  `components/Icon.jsx` — supporting pieces from the supplied package.
 - `lib/business.js` — **single source of truth** for phone, WhatsApp, address,
   map query and opening hours. Edit here.
 
-Before launch (carried over from the package's own notes):
+Before launch:
 
 - Phone, address and hours were transcribed from a screenshot — confirm them, and
   confirm the number is WhatsApp-enabled.

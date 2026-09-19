@@ -1,0 +1,270 @@
+/* =====================================================================
+   Visit section — built from the "More Than Pets" design concept.
+   A mid-page section (not the page hero): living water backdrop,
+   location card with the real map, visit cards and a feature strip.
+   ===================================================================== */
+.vw {
+  --px: 0px;
+  --py: 0px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #f4f7fb;
+  background: #041c38;
+  padding: 72px 0 36px;
+}
+
+/* ---------- backdrop layers ---------- */
+.vw-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.vw-water {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 58% 0%, rgba(128,206,248,.55), transparent 70%),
+    radial-gradient(ellipse 60% 55% at 55% 45%, rgba(24,118,200,.5), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 100% 60%, rgba(10,80,140,.45), transparent 70%),
+    linear-gradient(180deg, #07345f 0%, #052a4f 40%, #041d3a 75%, #03152b 100%);
+}
+.vw-rays {
+  position: absolute; top: -240px; left: 32%; width: 900px; height: 1400px; opacity: .22;
+  background: repeating-conic-gradient(from 150deg at 50% 0%, transparent 0deg 6deg, rgba(170,225,255,.55) 8deg, transparent 10deg 17deg);
+  filter: blur(8px); mix-blend-mode: screen; transform-origin: 50% 0%;
+  animation: vw-rays 18s ease-in-out infinite alternate;
+}
+.vw-arch {
+  position: absolute; top: 60px; left: calc(40% - 30px);
+  width: clamp(420px, 36vw, 640px); height: 760px;
+  border-radius: 48% 48% 0 0 / 22% 22% 0 0;
+  border: 2px solid rgba(160,215,255,.16);
+  box-shadow: inset 0 0 80px rgba(80,170,240,.18), 0 0 60px rgba(40,120,200,.15);
+  background: radial-gradient(ellipse at 50% 30%, rgba(90,180,240,.18), transparent 70%);
+}
+.vw-scene {
+  position: absolute; top: 76px; left: 43%; width: clamp(360px, 29vw, 520px);
+  transform: translate(var(--px), var(--py)); will-change: transform;
+}
+.vw-scene img {
+  width: 100%; height: auto; display: block;
+  mix-blend-mode: screen; filter: saturate(1.05) contrast(1.04);
+  transform-origin: 50% 35%; animation: vw-drift 20s ease-in-out infinite alternate;
+}
+.vw-shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(3,22,44,.72) 0%, rgba(3,22,44,.35) 30%, transparent 52%),
+    linear-gradient(0deg, rgba(2,14,30,.92) 0%, rgba(2,14,30,.4) 16%, transparent 34%);
+}
+.vw-reef {
+  position: absolute; left: -8px; bottom: 150px; width: 150px; height: auto;
+  transform-origin: 50% 100%; animation: vw-sway 11s ease-in-out infinite alternate;
+}
+.vw-leaves { position: absolute; width: 260px; height: 260px; opacity: .55; }
+.vw-leaves--tl { top: -40px; left: -70px; transform-origin: 0 0; animation: vw-leaf 9s ease-in-out infinite alternate; }
+.vw-leaves--r { right: -90px; top: 38%; opacity: .4; transform-origin: 100% 50%; animation: vw-leaf-r 10s ease-in-out infinite alternate; }
+.vw-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .9; }
+.vw-waves { position: absolute; left: 0; right: 0; bottom: 110px; width: 100%; height: 220px; }
+.vw-waves path { fill: none; stroke: url(#vwWave); stroke-width: 2; filter: drop-shadow(0 0 6px rgba(140,220,255,.6)); }
+
+@keyframes vw-rays { from { transform: rotate(-9deg); opacity: .16; } to { transform: rotate(8deg); opacity: .28; } }
+@keyframes vw-drift { from { transform: translate3d(-5px,0,0) scale(1.02); } to { transform: translate3d(7px,-10px,0) scale(1.065); } }
+@keyframes vw-sway { from { transform: rotate(-5deg); } to { transform: rotate(-1deg) translateY(4px); } }
+@keyframes vw-leaf { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@keyframes vw-leaf-r { from { transform: scaleX(-1) rotate(-12deg); } to { transform: scaleX(-1) rotate(-6deg); } }
+
+/* ---------- edge labels ---------- */
+.vw-side-l {
+  position: absolute; left: 22px; top: 50%; z-index: 1; margin: 0;
+  writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg);
+  font-size: 10px; letter-spacing: .32em; color: rgba(214,232,245,.62);
+}
+.vw-side-r {
+  position: absolute; right: 20px; top: 130px; z-index: 1;
+  list-style: none; margin: 0; padding: 22px 0;
+  display: grid; gap: 12px;
+  font-size: 10px; letter-spacing: .28em; line-height: 1.5; color: rgba(214,232,245,.72);
+}
+.vw-side-r::before, .vw-side-r::after { content: ""; position: absolute; left: 0; width: 34px; height: 1px; background: rgba(233,207,143,.6); }
+.vw-side-r::before { top: 0; }
+.vw-side-r::after { bottom: 0; }
+
+/* ---------- layout ---------- */
+.vw-inner { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+.vw-top {
+  display: grid; grid-template-columns: minmax(0, 580px) 1fr minmax(0, 520px);
+  align-items: end; column-gap: 24px; min-height: 560px;
+}
+.vw-copy { grid-column: 1; align-self: start; padding-top: 44px; }
+.vw-right { grid-column: 3; display: flex; flex-direction: column; }
+
+/* ---------- copy ---------- */
+.vw-eyebrow { display: flex; align-items: center; gap: 14px; margin: 0; font-size: 13px; font-weight: 500; letter-spacing: .42em; color: #f1dca4; }
+.vw-eyebrow svg { color: #e9c77c; }
+.vw-title {
+  margin: 22px 0 0;
+  font-family: var(--font-fraunces), Georgia, serif; font-weight: 500;
+  font-size: clamp(36px, 3.9vw, 64px); line-height: 1.05; letter-spacing: -.02em;
+  color: #fff; text-shadow: 0 4px 40px rgba(0,20,45,.45);
+}
+.vw-line { display: inline-block; }
+/* gradient text: drop the inherited text-shadow (it would paint over the fill) */
+.vw-gold {
+  background: linear-gradient(180deg, #fff1c6 0%, #ecd08c 45%, #c99a4a 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: none; filter: drop-shadow(0 4px 24px rgba(0,20,45,.35));
+}
+.vw-lede { margin: 22px 0 0; max-width: 560px; font-size: clamp(15px, 1.1vw, 17.5px); line-height: 1.6; color: rgba(236,243,250,.9); }
+.vw-micro { margin: 24px 0 0; font-size: 11.5px; letter-spacing: .3em; color: rgba(236,243,250,.85); }
+.vw-micro span { margin: 0 10px; color: #e3c27a; }
+.vw-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; margin-top: 30px; }
+.vw-btn-gold {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 17px 30px; border-radius: 999px; font-size: 17px; font-weight: 600; color: #10263a;
+  background: linear-gradient(120deg,#f8e5b0 0%,#e6c677 45%,#f3dda2 70%,#c4a35d 100%);
+  border: 1px solid #f9ebbf; box-shadow: 0 0 28px rgba(226,199,128,.22), inset 0 1px 1px #fff8d7;
+}
+.vw-story { display: flex; align-items: center; gap: 16px; color: #fff; }
+.vw-play { flex: none; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.85); }
+.vw-play svg { fill: #fff; stroke: #fff; margin-left: 3px; }
+.vw-story strong { display: block; font-size: 17px; font-weight: 600; }
+.vw-story small { display: block; margin-top: 2px; font-size: 13px; color: rgba(220,232,242,.75); }
+
+/* ---------- script note ---------- */
+.vw-script {
+  align-self: flex-end; margin: 0 16px 18px 0;
+  font-family: var(--font-script), cursive; font-size: clamp(26px, 2.2vw, 36px); line-height: 1.05;
+  color: rgba(236,244,252,.92); text-shadow: 0 2px 16px rgba(0,30,60,.5);
+  transform: rotate(-8deg);
+}
+.vw-heart { font-family: var(--font-fraunces), serif; font-size: .8em; color: #e9c77c; }
+
+/* ---------- glass ---------- */
+.vw-glass {
+  background: linear-gradient(135deg, rgba(120,190,240,.2), rgba(20,80,140,.3) 55%, rgba(10,55,110,.42));
+  border: 1px solid rgba(190,228,255,.38); border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0,18,40,.35), inset 0 1px 0 rgba(235,251,255,.18);
+  backdrop-filter: blur(18px) saturate(130%); -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+/* ---------- location card ---------- */
+.vw-location { padding: 22px 20px 20px; }
+.vw-loc-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.vw-loc-title { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; color: #fff; }
+.vw-loc-sub { font-size: 14px; color: rgba(225,236,246,.82); }
+.vw-map { position: relative; height: 250px; overflow: hidden; border-radius: 12px; background: #dfe8ee; }
+.vw-map iframe { display: block; width: 100%; height: 100%; border: 0; }
+.vw-map-expand {
+  position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center;
+  width: 42px; height: 42px; border-radius: 50%; color: #fff;
+  background: rgba(10,60,110,.85); box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+.vw-loc-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 14px; }
+.vw-loc-foot strong { font-size: 16px; font-weight: 600; }
+.vw-loc-foot p { margin: 4px 0 0; font-size: 12px; line-height: 1.5; color: rgba(225,236,246,.82); }
+.vw-btn-outline {
+  flex: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  padding: 10px 16px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.75);
+  font-size: 14px; font-weight: 600; color: #fff;
+}
+
+/* ---------- visit cards ---------- */
+.vw-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 18px; }
+.vw-card {
+  position: relative; overflow: hidden; display: flex; align-items: flex-start; gap: 20px;
+  padding: 22px 60px 22px 22px; color: #fff;
+}
+.vw-card-ic { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid rgba(233,199,124,.8); color: #e9c77c; }
+.vw-card h3 { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 0 8px; font-size: 18px; font-weight: 600; }
+.vw-card p { margin: 0; font-size: 14px; line-height: 1.45; color: rgba(228,238,247,.88); }
+.vw-phone { display: block; margin-top: 10px; font-size: 20px; font-weight: 600; letter-spacing: .01em; }
+.vw-hours { margin: 0; font-size: 14px; color: rgba(228,238,247,.9); }
+.vw-hours div { display: grid; grid-template-columns: 80px auto; gap: 12px; line-height: 1.75; }
+.vw-hours dt, .vw-hours dd { margin: 0; }
+.vw-pill { padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(190,228,255,.35); font-size: 10px; font-weight: 600; letter-spacing: .04em; color: rgba(210,228,240,.85); }
+.vw-pill.is-open { color: #a4f0cd; border-color: rgba(116,216,185,.45); background: rgba(59,202,145,.14); }
+.vw-sprig {
+  position: absolute; right: 18px; bottom: 10px; width: 54px; height: 82px; pointer-events: none;
+  fill: none; stroke: rgba(233,207,143,.28); stroke-width: 1.2; stroke-linecap: round;
+}
+
+/* ---------- feature strip ---------- */
+.vw-features {
+  display: grid; grid-template-columns: repeat(4, 1fr) auto; align-items: center; gap: 24px;
+  margin-top: 30px; padding-top: 18px;
+}
+/* the strip runs a little past the content edges, as in the design */
+@media (min-width: 1400px) { .vw-features { margin-left: -56px; margin-right: -96px; } }
+.vw-feature { display: flex; align-items: center; gap: 16px; color: #e9c77c; }
+.vw-feature strong { display: block; font-size: 12px; font-weight: 600; letter-spacing: .16em; color: #fff; }
+.vw-feature span { display: block; margin-top: 4px; font-size: 13px; color: rgba(214,230,242,.75); }
+.vw-goa { position: relative; display: flex; flex-direction: column; padding-left: 24px; border-left: 1px solid rgba(233,207,143,.45); }
+.vw-goa-script { position: absolute; top: -54px; left: 34px; font-family: var(--font-script), cursive; font-size: 56px; line-height: .9; color: #e9c77c; transform: rotate(-8deg); }
+.vw-goa-line { font-size: 11px; letter-spacing: .3em; line-height: 1.9; color: rgba(214,230,242,.8); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1280px) {
+  .vw-side-l, .vw-side-r { display: none; }
+}
+@media (max-width: 1100px) {
+  .vw-top { grid-template-columns: minmax(0, 1fr) minmax(0, 440px); column-gap: 32px; }
+  .vw-right { grid-column: 2; }
+  .vw-scene { left: 34%; width: 400px; opacity: .55; }
+  .vw-arch { display: none; }
+  .vw-features { grid-template-columns: repeat(2, 1fr); }
+  .vw-goa { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 20px; padding-left: 0; border-left: 0; }
+  .vw-goa-script { position: static; }
+}
+@media (max-width: 860px) {
+  .vw { padding-top: 72px; }
+  .vw-top { display: block; min-height: 0; }
+  .vw-right { margin-top: 36px; }
+  .vw-script { align-self: center; margin: 0 0 18px; }
+  .vw-scene { left: auto; right: -80px; top: 60px; width: 360px; opacity: .4; }
+  .vw-cards { grid-template-columns: 1fr; }
+  /* anchored to the bottom so they track the stacked cards, not the copy */
+  .vw-reef { left: auto; right: -14px; bottom: 24px; width: 96px; opacity: .6; }
+  .vw-waves { bottom: 520px; }
+  .vw-leaves--r { display: none; }
+}
+@media (max-width: 520px) {
+  .vw-title { font-size: clamp(36px, 10vw, 46px); }
+  .vw-micro { font-size: 11px; letter-spacing: .22em; }
+  .vw-micro span { margin: 0 6px; }
+  .vw-btn-gold { padding: 15px 22px; font-size: 15px; }
+  .vw-map { height: 210px; }
+  .vw-loc-head { flex-wrap: wrap; }
+  .vw-loc-foot { flex-direction: column; align-items: flex-start; }
+  .vw-features { grid-template-columns: 1fr; }
+  .vw-reef { bottom: -34px; width: 80px; opacity: .5; }
+  /* give the text the width the decorative sprig reserves on larger cards */
+  .vw-card { padding-right: 22px; }
+  .vw-sprig { opacity: .5; }
+  .vw-hours div { grid-template-columns: auto 1fr; column-gap: 14px; }
+  .vw-hours dt, .vw-hours dd { white-space: nowrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vw-rays, .vw-scene img, .vw-reef, .vw-leaves { animation: none !important; }
+  .vw-scene { transform: none !important; }
+}
+
+/* =====================================================================
+   Heart of Dolphin band
+   ===================================================================== */
+.hs { padding: clamp(72px, 9vw, 110px) 0; background: #032333; color: #f4f7fb; text-align: center; }
+.hs-symbol {
+  display: grid; place-items: center; width: 58px; height: 58px; margin: 0 auto 22px;
+  border-radius: 50%; border: 1px solid rgba(234,212,155,.25); color: #edcf8e;
+  box-shadow: 0 0 40px rgba(88,201,220,.06);
+}
+.hs-eyebrow { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .38em; color: #edcf8e; }
+.hs-title {
+  margin: 20px 0; font-family: var(--font-fraunces), Georgia, serif; font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 46px); line-height: 1.28; letter-spacing: -.01em; color: #fff;
+}
+.hs-title em { font-style: italic; color: #edcf8e; }
+.hs-body { max-width: 62ch; margin: 0 auto; font-size: 15px; line-height: 1.85; color: rgba(190,212,222,.9); }
+.hs-btn {
+  display: inline-flex; align-items: center; gap: 12px; margin-top: 28px;
+  padding: 14px 26px; border-radius: 999px; border: 1px solid rgba(237,207,142,.6);
+  background: rgba(237,207,142,.03); color: #edcf8e; font-size: 14px; font-weight: 600;
+  transition: background .2s, transform .2s;
+}
+.hs-btn:hover { background: rgba(237,207,142,.1); transform: translateY(-2px); }

@@ -292,6 +292,7 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 /* ---------- Loader ---------- */
 .loader { position: fixed; inset: 0; z-index: 1000; background: var(--void); display: grid; place-items: center; }
 .loader-inner { text-align: center; width: min(320px,80vw); }
+.loader-logo { display: block; width: min(260px, 70vw); height: auto; margin: 0 auto; }
 .loader-mark { font-family: var(--font-fraunces), Georgia, serif; font-size: 2.4rem; letter-spacing: .35em; padding-left: .35em; color: #fff; }
 .loader-sub { font-size: .72rem; letter-spacing: .4em; text-transform: uppercase; color: rgba(255,255,255,.4); margin: 10px 0 26px; }
 .loader-bar { height: 2px; background: rgba(255,255,255,.12); border-radius: 2px; overflow: hidden; }

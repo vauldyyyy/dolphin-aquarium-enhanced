@@ -1,6 +1,6 @@
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Great_Vibes } from "next/font/google";
 import "./globals.css";
-import "./living.css";
+import "./sections.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -13,6 +13,14 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+/* Handwritten accents in the Visit section ("Inspiring a kinder brighter world", "Goa") */
+const script = Great_Vibes({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-script",
   display: "swap",
 });
 
@@ -33,7 +41,7 @@ export const viewport = { themeColor: "#050505" };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${script.variable}`}>
       <body>{children}</body>
     </html>
   );

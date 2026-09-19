@@ -10,15 +10,13 @@ const rise = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
 };
 
-/** "The heart of Dolphin" closing band, ported from the Living Aquarium package. */
+/** "The heart of Dolphin" band — leads into the Visit section below it. */
 export default function HeartSection() {
   return (
-    <div className="dolphin-site dolphin-site--plain" data-nav="dark">
+    <section className="hs has-live-bg" id="heart" data-nav="dark" aria-labelledby="hs-title">
       <LiveBackground variant="aqua" density={0.9} />
-      <motion.section
-        className="care-section wrap"
-        id="heart"
-        aria-labelledby="care-title"
+      <motion.div
+        className="wrap hs-inner"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.4 }}
@@ -27,33 +25,33 @@ export default function HeartSection() {
         {/* reveal on the wrapper, heartbeat on the inner — a child with its own
             `animate` stops inheriting the parent's variants */}
         <motion.div variants={rise}>
-          <motion.div
-            className="care-symbol"
+          <motion.span
+            className="hs-symbol"
             aria-hidden="true"
             animate={{ scale: [1, 1.07, 1] }}
             transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
           >
-            <Icon name="heart" />
-          </motion.div>
+            <Icon name="heart" size={27} strokeWidth={1} />
+          </motion.span>
         </motion.div>
-        <motion.p className="eyebrow" variants={rise}>THE HEART OF DOLPHIN</motion.p>
-        <motion.h2 id="care-title" variants={rise}>
+        <motion.p className="hs-eyebrow" variants={rise}>THE HEART OF DOLPHIN</motion.p>
+        <motion.h2 id="hs-title" className="hs-title" variants={rise}>
           The magic isn&apos;t just what you see.
           <br />
           <em>It&apos;s how you&apos;re cared for.</em>
         </motion.h2>
-        <motion.p variants={rise}>
+        <motion.p className="hs-body" variants={rise}>
           A beautiful aquarium. A happy companion. Someone who takes the time to listen.
           <br />
           That&apos;s the world we want to share with you.
         </motion.p>
         <motion.div variants={rise}>
-          <a className="button button-outline" href="#visit">
+          <a className="hs-btn" href="#visit">
             Make a little room for wonder
-            <Icon name="arrow" />
+            <Icon name="arrow" size={18} />
           </a>
         </motion.div>
-      </motion.section>
-    </div>
+      </motion.div>
+    </section>
   );
 }

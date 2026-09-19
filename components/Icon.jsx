@@ -52,6 +52,7 @@ const PATHS = {
     </>
   ),
   sparkle: <path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" />,
+  expand: <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />,
 };
 
 export default function Icon({
