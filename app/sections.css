@@ -400,15 +400,7 @@
 
 /* the bar is laid exactly over the video's branch (positioned from JS) */
 .fl-bar { position: absolute; transform: translateY(-50%); pointer-events: none; }
-.fl-track, .fl-fill {
-  position: absolute; left: 0; top: 50%; height: max(3px, 16%); transform: translateY(-50%); border-radius: 999px;
-}
-.fl-track { right: 0; background: rgba(255,255,255,.2); }
-.fl-fill { background: rgba(250,247,235,.95); box-shadow: 0 1px 3px rgba(0,0,0,.45); }
-.fl-tip {
-  position: absolute; right: 0; top: 50%; width: 10px; height: 10px; transform: translate(50%, -50%);
-  border-radius: 50%; background: #faf7eb; box-shadow: 0 1px 4px rgba(0,0,0,.5);
-}
+.fl-vine { position: absolute; inset: 0; overflow: visible; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.45)); }
 .fl-pct {
   position: absolute; bottom: calc(100% + 14px);
   padding: 5px 12px; border-radius: 999px; white-space: nowrap;
