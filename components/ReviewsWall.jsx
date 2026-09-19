@@ -6,6 +6,7 @@
 
 import { motion } from "framer-motion";
 import SectionVideo from "./SectionVideo";
+import SceneLayers from "./SceneLayers";
 
 const REVIEWS_A = [
   ["SA", "Sarah Alvares", "Extremely happy with the 4ft aquarium tank made by Dolphin Aquarium. From planning the tank to build quality to safe doorstep delivery — everything was handled professionally. Alistair and his dad went the extra mile, sharing filtration and maintenance knowledge. You can trust them for quality work and honest support. 👍🐠"],
@@ -60,7 +61,7 @@ function Row({ items, reverse }) {
 export default function ReviewsWall() {
   return (
     <section className="rwall" id="reviews" data-nav="light" aria-label="Customer reviews">
-      <SectionVideo name="reviews" scrim="light" scrimStrength={0.4} />
+      <SectionVideo name="reviews" scrim="light" scrimStrength={0.4} fallback={<SceneLayers preset="reviews" />} />
       {/* Warm sunlit-forest backdrop with slow-drifting animal silhouettes */}
       <div className="rwall-bg" aria-hidden="true">
         <div className="rwall-sun" />

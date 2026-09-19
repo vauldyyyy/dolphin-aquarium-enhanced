@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import SectionVideo from "./SectionVideo";
+import SceneLayers from "./SceneLayers";
 
 export default function SiteFooter() {
   return (
     <footer className="site-foot" data-nav="dark">
-      <SectionVideo name="footer" scrim="dark" scrimStrength={0.6} opacity={0.7} />
+      <SectionVideo name="footer" scrim="dark" scrimStrength={0.6} opacity={0.7} fallback={<SceneLayers preset="footer" />} />
       <div className="wrap">
         <div>
           <div className="logo">DOLPHIN</div>

@@ -10,8 +10,8 @@ import {
   useMotionTemplate,
 } from "framer-motion";
 import Icon from "./Icon";
-import GardenBackground from "./GardenBackground";
 import SectionVideo from "./SectionVideo";
+import SceneLayers from "./SceneLayers";
 import CompanionQuiz from "./CompanionQuiz";
 import { Words, Magnetic } from "./motionKit";
 import { waLink } from "../lib/business";
@@ -146,7 +146,7 @@ export default function CompanionsGallery() {
 
   return (
     <section className="gal has-live-bg amb-garden" id="gallery" data-nav="light" aria-label="A few of our companions">
-      <SectionVideo name="gallery" scrim="light" scrimStrength={0.35} fallback={<GardenBackground leaves={10} paws={6} pollen={1} />} />
+      <SectionVideo name="gallery" scrim="light" scrimStrength={0.35} fallback={<SceneLayers preset="gallery" />} />
       <div className="amb-motes" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
 
       <div className="wrap">
