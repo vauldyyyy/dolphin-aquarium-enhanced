@@ -334,8 +334,12 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 
 .founder-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; border-radius: 16px; margin-bottom: 20px; }
 
-.clients-row img { height: 64px; width: auto; max-width: 260px; object-fit: contain; display: block; }
-.clients-row .client-logo { background: #fff; border: 1px solid rgba(42,33,24,.1); border-radius: 20px; padding: 30px 52px; display: grid; place-items: center; box-shadow: 0 14px 34px rgba(42,33,24,.09); }
+.clients-row { display: grid; grid-template-columns: repeat(3, minmax(0, 300px)); justify-content: center; gap: 26px; margin: 44px auto 10px; }
+.clients-row img { max-width: 78%; max-height: 72px; object-fit: contain; display: block; transition: transform .35s ease; }
+.clients-row .client-logo { background: #fff; border: 1px solid rgba(42,33,24,.1); border-radius: 20px; height: 150px; display: grid; place-items: center; box-shadow: 0 14px 34px rgba(42,33,24,.09); transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+.clients-row .client-logo:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(201,154,74,.28); border-color: rgba(201,154,74,.55); }
+.clients-row .client-logo:hover img { transform: scale(1.06); }
+@media (max-width: 760px) { .clients-row { grid-template-columns: 1fr; max-width: 320px; } }
 
 
 .pcard .banner.has-img { padding: 0; }
@@ -344,10 +348,19 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  /* CALM, NOT FROZEN: ambient layers slow to a dignified pace instead of dying
+     (scroll-scrubbing and 3D tilt stay off per the brief; CSS ambience stays alive) */
+  .amb-ocean::before { animation-duration: 46s !important; }
+  .amb-ocean::after { animation-duration: 34s !important; }
+  .amb-home::before { animation-duration: 26s !important; }
+  .amb-garden::before, .amb-garden::after { animation-duration: 28s !important; }
+  .amb-motes i { animation-duration: 70s !important; }
+  .rwall-track { animation-duration: 280s !important; }
+  .rwall-animal { animation-duration: 420s !important; }
+  .svc-cards-track { animation-duration: 160s !important; }
+  .grain { animation: none; }
 }
 
 /* Shop filter chips */
@@ -435,13 +448,15 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 .rwall-card .av { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: .72rem; font-weight: 700; color: #fff; background: linear-gradient(120deg, var(--gold), var(--leaf)); flex: none; }
 @media (max-width: 560px) { .rwall-card { width: 280px; } .rwall-track { animation-duration: 55s; } }
 @media (prefers-reduced-motion: reduce) {
-  .rwall-track, .rwall-animal { animation: none !important; }
-  .rwall-row { overflow-x: auto; }
+  .rwall-track { animation-duration: 280s !important; }
+  .rwall-animal { animation-duration: 420s !important; }
 }
 
-/* ---------- Services marquee ---------- */
-.svc-marquee { margin-top: clamp(44px,6vw,64px); border-top: 1px solid rgba(201,154,74,.35); border-bottom: 1px solid rgba(201,154,74,.35); padding: 20px 0; overflow: hidden; }
-.svc-marquee-track { display: flex; gap: 44px; width: max-content; animation: rwall-scroll 46s linear infinite; }
-.svc-marquee-track span { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-fraunces), serif; font-size: 1.06rem; font-weight: 500; color: rgba(42,33,24,.72); white-space: nowrap; }
-.svc-marquee-track span i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex: none; }
-.svc-marquee:hover .svc-marquee-track { animation-play-state: paused; }
+/* ---------- Services photo-card marquee ---------- */
+.svc-cards { margin-top: clamp(44px,6vw,64px); border-top: 1px solid rgba(201,154,74,.35); border-bottom: 1px solid rgba(201,154,74,.35); padding: 24px 0; overflow: hidden; }
+.svc-cards-track { display: flex; gap: 22px; width: max-content; animation: rwall-scroll 55s linear infinite; }
+.svc-card { position: relative; width: 240px; flex: none; margin: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 26px rgba(42,33,24,.12); }
+.svc-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.svc-card figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 14px 10px; font-size: .88rem; font-weight: 600; color: #fff; background: linear-gradient(180deg, transparent, rgba(10,20,26,.78)); }
+.svc-card:hover { box-shadow: 0 16px 36px rgba(42,33,24,.2); }
+.svc-cards:hover .svc-cards-track { animation-play-state: paused; }

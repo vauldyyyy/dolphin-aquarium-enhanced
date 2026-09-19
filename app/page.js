@@ -302,54 +302,33 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Scrolling strip of everything we do */}
-            <div className="svc-marquee" aria-hidden="true">
-              <div className="svc-marquee-track">
-                {[
-                  "Designer & custom-built aquariums",
-                  "Aquascaping",
-                  "Exotic & ornamental fish",
-                  "Edible fish & live seafood",
-                  "Koi ponds",
-                  "Indoor filtration systems",
-                  "Outdoor filtration systems",
-                  "Waterfalls & water features",
-                  "Marine & reef systems",
-                  "Live plants & hardscape",
-                  "Domestic & aided animals",
-                  "Premium pet food & nutrition",
-                  "Luxury pet accessories",
-                  "Walk-in aviaries",
-                  "Pet grooming",
-                  "DNA testing & microchipping",
-                  "Pet vaccinations",
-                  "First aid & preventive care",
-                  "Tank maintenance",
-                  "Safe doorstep delivery",
-                ].concat([
-                  "Designer & custom-built aquariums",
-                  "Aquascaping",
-                  "Exotic & ornamental fish",
-                  "Edible fish & live seafood",
-                  "Koi ponds",
-                  "Indoor filtration systems",
-                  "Outdoor filtration systems",
-                  "Waterfalls & water features",
-                  "Marine & reef systems",
-                  "Live plants & hardscape",
-                  "Domestic & aided animals",
-                  "Premium pet food & nutrition",
-                  "Luxury pet accessories",
-                  "Walk-in aviaries",
-                  "Pet grooming",
-                  "DNA testing & microchipping",
-                  "Pet vaccinations",
-                  "First aid & preventive care",
-                  "Tank maintenance",
-                  "Safe doorstep delivery",
-                ]).map((s, i) => (
-                  <span key={i}><i />{s}</span>
-                ))}
+            {/* Auto-scrolling strip of photo cards — everything we do */}
+            <div className="svc-cards" aria-hidden="true">
+              <div className="svc-cards-track">
+                {(() => {
+                  const cards = [
+                    ["/assets/aquarium.jpg", "Custom aquariums"],
+                    ["/assets/fishes.jpg", "Exotic & ornamental fish"],
+                    ["/assets/products/planted-2ft.jpg", "Planted aquascapes"],
+                    ["/assets/products/reef-system.jpg", "Marine & reef systems"],
+                    ["/assets/products/koi.jpg", "Koi ponds"],
+                    ["/assets/products/aviary.jpg", "Walk-in aviaries"],
+                    ["/assets/products/grooming.jpg", "Pet grooming"],
+                    ["/assets/care-safety.jpg", "Vaccinations & microchipping"],
+                    ["/assets/golden-retriever.jpg", "Ethically raised puppies"],
+                    ["/assets/persian-cat.jpg", "Cats & kittens"],
+                    ["/assets/husky.jpg", "Huskies & working dogs"],
+                    ["/assets/hamster.jpg", "Small pets"],
+                    ["/assets/products/filtration.jpg", "Filtration systems"],
+                    ["/assets/products/driftwood.jpg", "Hardscape & driftwood"],
+                  ];
+                  return [...cards, ...cards].map(([src, label], i) => (
+                    <figure className="svc-card" key={i}>
+                      <img src={src} alt="" loading="lazy" />
+                      <figcaption>{label}</figcaption>
+                    </figure>
+                  ));
+                })()}
               </div>
             </div>
           </div>
