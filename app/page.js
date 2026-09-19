@@ -11,6 +11,7 @@ import WhatsAppFloat from "../components/WhatsAppFloat";
 import LiveBackground from "../components/LiveBackground";
 import GardenBackground from "../components/GardenBackground";
 import CompanionsGallery from "../components/CompanionsGallery";
+import Immersion from "../components/Immersion";
 import { useImageSequence } from "../components/useImageSequence";
 import {
   ScrollProgress,
@@ -422,12 +423,15 @@ export default function Home() {
             </div>
             <div className="tcols">
               {[
-                ["SA", "Sarah Alvares", "Extremely happy with the 4ft aquarium tank made by Dolphin Aquarium. From planning to build quality to safe doorstep delivery — handled professionally. Alistair and his dad shared filtration and maintenance knowledge, not just a sale. Highly recommend. 🐠"],
-                ["KG", "Kanishka Gowda", "A wonderful experience! Clean, well-organised and full of high-quality products. What makes it special is the owner — kind, knowledgeable and genuinely passionate about animals ❤️."],
-                ["DG", "Deirdre Sharon Gomes", "Our dachshund pup fell sick with Parvovirus within a day. Mr. Alistair immediately took him back and gave us a healthy, vaccinated pup within days. Truly kind and understanding!"],
-                ["PH", "Parth Hiremath", "The best pet shop I've ever visited — warmth, enthusiasm and a team that clearly loves animals. A one-stop shop that treats you like family and your pet like royalty."],
-                ["AM", "Arya Manjrekar", "Went in for a companion for our lovebird and Alistair helped us find the perfect pair — plus taught us so much as first-time bird parents. Totally recommend. 💯"],
-                ["CV", "Casy Vaz", "Super helpful and patient, answering all my questions. The animals looked well cared for and the product selection was impressive."],
+                ["SA", "Sarah Alvares", "Extremely happy with the 4ft aquarium tank made by Dolphin Aquarium. From planning the tank to build quality to safe doorstep delivery — everything was handled professionally. Alistair and his dad went the extra mile, sharing filtration and maintenance knowledge. You can trust them for quality work and honest support. 👍🐠"],
+                ["DK", "Diksha Kavlekar", "We recently visited and had an amazing experience! The owner was super friendly and knowledgeable, and made sure we found exactly what we needed for our furry friend. Clean, well-organized, and a wide range of products. ❤️"],
+                ["KG", "Kanishka Gowda", "The store is clean, well-organized and full of high-quality products. But what truly makes this place special is the owner. He's kind, knowledgeable, very sweet and genuinely passionate about animals. Every visit feels personal. Highly recommended 🐕"],
+                ["CV", "Casy Vaz", "The owner and staff are always attentive and assisting, with a beautiful and wide selection of fish, birds and many more beautiful creatures. Great deals too. Once again — highly recommended."],
+                ["CD", "Chalsie da Silva", "I recently bought a Doberman puppy from this shop and I'm extremely satisfied. The puppy is very good, active, and cute. The service was excellent and the owner was very friendly, patient, and supportive throughout the process."],
+                ["LH", "Lionel Hillery Antao", "I would rate it 5/5. Our dachshund pup fell sick with Parvovirus within a day. I contacted Mr. Alistair and he immediately told us to get the pup back. He gave us a new, healthy, vaccinated pup within a few days. So kind and understanding — thank you!"],
+                ["DG", "Deirdre Sharon Gomes", "This isn't just a store — it's a haven for pets and their humans. Hands-down the best pet shop I've ever visited. A one-stop shop for all things pet-related, backed by a team that treats you like family and your pet like royalty."],
+                ["PH", "Parth Hiremath", "Went in to get a buddy for our lovebird — she lost her mate a few days ago. Allister helped us find the perfect pair, and taught us tons as first-time bird parents. We also got some super cute fish! 💘 Totally recommend them. 💯"],
+                ["AM", "Arya Manjrekar", "Went to the pet store today — the shop was amazing and the owner was so sweet, telling us stuff we didn't know. It's rare to find such helpful pet store owners these days. You won't regret it!"],
               ].map(([av, name, quote], i) => (
                 <Reveal as={motion.figure} className="tcard" key={name} delay={(i % 3) * 0.08}>
                   <div className="stars">★★★★★</div>
@@ -447,6 +451,7 @@ export default function Home() {
       </main>
       <SiteFooter />
       <WhatsAppFloat />
+      <Immersion />
     </>
   );
 }

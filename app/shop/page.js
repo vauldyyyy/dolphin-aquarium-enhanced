@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Nav from "../../components/Nav";
 import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
@@ -8,7 +9,11 @@ import WhatsAppFloat from "../../components/WhatsAppFloat";
 import LiveBackground from "../../components/LiveBackground";
 import { ScrollProgress, Words } from "../../components/motionKit";
 
-const WA = "https://wa.me/919953858521";
+const WA_NUMBER = "919953858521";
+const waEnquire = (product, price) =>
+  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
+    `Hi Dolphin Aquarium & Pets! I'm interested in the *${product}* (${price}) from your website. Is it available, and can you share more details?`
+  )}`;
 
 const GROUPS = [
   {
@@ -16,10 +21,10 @@ const GROUPS = [
     title: "Designer & Custom Aquariums",
     tone: "content--cream",
     items: [
-      ["Nano cube tank", "Aquarium", "Nano Cube Tank", "from ₹3,500"],
-      ["2ft planted setup", "Aquarium", "2ft Planted Setup", "from ₹8,900"],
-      ["4ft custom tank", "Custom Build", "4ft Custom Tank", "Quote"],
-      ["Reef-ready system", "Marine", "Reef-Ready System", "Quote"],
+      { name: "Nano Cube Tank", cat: "Aquarium", price: "from ₹3,500", img: "/assets/products/nano-cube.jpg", alt: "Nano cube aquarium with moss and red shrimp" },
+      { name: "2ft Planted Setup", cat: "Aquarium", price: "from ₹8,900", img: "/assets/products/planted-2ft.jpg", alt: "Two-foot planted aquarium on a wooden cabinet" },
+      { name: "4ft Custom Tank", cat: "Custom Build", price: "Quote", img: "/assets/products/custom-4ft.jpg", alt: "Four-foot custom aquarium with blue LED lighting" },
+      { name: "Reef-Ready System", cat: "Marine", price: "Quote", img: "/assets/products/reef-system.jpg", alt: "Reef aquarium with live corals and a clownfish" },
     ],
   },
   {
@@ -27,10 +32,10 @@ const GROUPS = [
     title: "Exotic & Ornamental Fish",
     tone: "content--sand",
     items: [
-      ["Fancy goldfish", "Freshwater", "Fancy Goldfish", "from ₹150"],
-      ["Betta (fighter)", "Freshwater", "Betta (Fighter)", "from ₹120"],
-      ["Discus", "Premium", "Discus", "Quote"],
-      ["Koi carp", "Pond", "Koi Carp", "Quote"],
+      { name: "Fancy Goldfish", cat: "Freshwater", price: "from ₹150", img: "/assets/products/goldfish.jpg", alt: "Fancy goldfish with flowing double tail" },
+      { name: "Betta (Fighter)", cat: "Freshwater", price: "from ₹120", img: "/assets/products/betta.jpg", alt: "Red and blue halfmoon betta with flared fins" },
+      { name: "Discus", cat: "Premium", price: "Quote", img: "/assets/products/discus.jpg", alt: "Three red-turquoise discus fish in a dark aquarium" },
+      { name: "Koi Carp", cat: "Pond", price: "Quote", img: "/assets/products/koi.jpg", alt: "Koi carp with orange, white and black pattern" },
     ],
   },
   {
@@ -38,10 +43,10 @@ const GROUPS = [
     title: "Live Plants & Hardscape",
     tone: "content--cream",
     items: [
-      ["Anubias nana", "Live Plant", "Anubias Nana", "from ₹120"],
-      ["Java fern", "Live Plant", "Java Fern", "from ₹100"],
-      ["Aqua soil", "Substrate", "Aqua Soil", "from ₹600"],
-      ["Driftwood", "Hardscape", "Driftwood", "from ₹250"],
+      { name: "Anubias Nana", cat: "Live Plant", price: "from ₹120", img: "/assets/products/anubias.jpg", alt: "Potted Anubias nana aquarium plant" },
+      { name: "Java Fern", cat: "Live Plant", price: "from ₹100", img: "/assets/products/java-fern.jpg", alt: "Java fern attached to driftwood" },
+      { name: "Aqua Soil", cat: "Substrate", price: "from ₹600", img: "/assets/products/aqua-soil.jpg", alt: "Bag of aquascaping soil substrate" },
+      { name: "Driftwood", cat: "Hardscape", price: "from ₹250", img: "/assets/products/driftwood.jpg", alt: "Twisted aquascaping driftwood piece" },
     ],
   },
   {
@@ -50,15 +55,25 @@ const GROUPS = [
     tone: "content--sand",
     warm: true,
     items: [
-      ["Premium dog food", "Nutrition", "Premium Dog Food", "from ₹450"],
-      ["Filtration systems", "Equipment", "Filtration Systems", "from ₹900"],
-      ["Grooming essentials", "Grooming", "Grooming Essentials", "from ₹350"],
-      ["Cages & aviaries", "Accessories", "Cages & Aviaries", "Quote"],
+      { name: "Premium Dog Food", cat: "Nutrition", price: "from ₹450", img: "/assets/products/dog-food.jpg", alt: "Premium bag of dog food with a bowl of kibble" },
+      { name: "Filtration Systems", cat: "Equipment", price: "from ₹900", img: "/assets/products/filtration.jpg", alt: "Modern aquarium canister filter with hoses" },
+      { name: "Grooming Essentials", cat: "Grooming", price: "from ₹350", img: "/assets/products/grooming.jpg", alt: "Pet grooming kit with brushes and shampoo" },
+      { name: "Cages & Aviaries", cat: "Accessories", price: "Quote", img: "/assets/products/aviary.jpg", alt: "Handcrafted bird aviary with a green parrot" },
     ],
   },
 ];
 
+const FILTERS = [
+  ["all", "Everything"],
+  ["aquariums", "Aquariums"],
+  ["fish", "Fish"],
+  ["plants", "Plants & Hardscape"],
+  ["care", "Food & Essentials"],
+];
+
 export default function Shop() {
+  const [filter, setFilter] = useState("all");
+
   return (
     <>
       <ScrollProgress />
@@ -79,44 +94,73 @@ export default function Shop() {
           </Reveal>
         </section>
 
-        {GROUPS.map((g) => (
-          <section className={`content ${g.tone}`} id={g.id} key={g.id}>
-            <div className="wrap">
-              <Reveal>
-                <h2 className="sec-title">{g.title}</h2>
-              </Reveal>
-              <div className="cards-4">
-                {g.items.map(([banner, cat, name, price], i) => (
-                  <Reveal
-                    className={`pcard${g.warm ? " warm" : ""}`}
-                    key={name}
-                    delay={i * 0.08}
-                    whileHover={{ y: -6, boxShadow: "0 22px 50px rgba(42,33,24,.14)" }}
-                  >
-                    <div className="banner">{banner}</div>
-                    <div className="pb">
-                      <span className="cat">{cat}</span>
-                      <h3>{name}</h3>
-                      <div className="prow">
-                        <span className="price">{price}</span>
-                        <motion.a
-                          className="mini-btn"
-                          href={WA}
-                          target="_blank"
-                          rel="noopener"
-                          whileHover={{ borderColor: "#3fa65b", color: "#3fa65b" }}
-                          whileTap={{ scale: 0.96 }}
-                        >
-                          Enquire
-                        </motion.a>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
+        <section className="content content--cream shop-filter-bar">
+          <div className="wrap">
+            <div className="chip-row" role="tablist" aria-label="Filter products">
+              {FILTERS.map(([id, label]) => (
+                <button
+                  key={id}
+                  role="tab"
+                  aria-selected={filter === id}
+                  className={`chip${filter === id ? " chip--on" : ""}`}
+                  onClick={() => setFilter(id)}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
-          </section>
-        ))}
+          </div>
+        </section>
+
+        {GROUPS.map((g) => {
+          if (filter !== "all" && filter !== g.id) return null;
+          return (
+            <section className={`content ${g.tone}`} id={g.id} key={g.id}>
+              <div className="wrap">
+                <Reveal>
+                  <h2 className="sec-title">{g.title}</h2>
+                </Reveal>
+                <motion.div className="cards-4" layout>
+                  <AnimatePresence mode="popLayout">
+                    {g.items.map((p, i) => (
+                      <motion.div
+                        key={p.name}
+                        layout
+                        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.96 }}
+                        transition={{ duration: 0.35, delay: i * 0.05 }}
+                        whileHover={{ y: -6, boxShadow: "0 22px 50px rgba(42,33,24,.14)" }}
+                        className={`pcard${g.warm ? " warm" : ""}`}
+                      >
+                        <div className="banner has-img">
+                          <img src={p.img} alt={p.alt} loading="lazy" />
+                        </div>
+                        <div className="pb">
+                          <span className="cat">{p.cat}</span>
+                          <h3>{p.name}</h3>
+                          <div className="prow">
+                            <span className="price">{p.price}</span>
+                            <motion.a
+                              className="mini-btn"
+                              href={waEnquire(p.name, p.price)}
+                              target="_blank"
+                              rel="noopener"
+                              whileHover={{ borderColor: "#3fa65b", color: "#3fa65b" }}
+                              whileTap={{ scale: 0.96 }}
+                            >
+                              Enquire
+                            </motion.a>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </motion.div>
+              </div>
+            </section>
+          );
+        })}
       </main>
       <SiteFooter />
       <WhatsAppFloat />

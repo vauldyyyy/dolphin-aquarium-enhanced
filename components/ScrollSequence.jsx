@@ -138,6 +138,7 @@ export default function ScrollSequence({
     <section
       id={id}
       ref={sectionRef}
+      data-immersion="true"
       className={`chapter chapter--${theme === "dark" ? "dark" : "warm"}`}
       style={{ height: `${heightVh}vh` }}
       data-nav={navTheme || (theme === "dark" ? "dark" : "light")}

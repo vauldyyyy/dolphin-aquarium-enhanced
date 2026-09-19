@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import Icon from "./Icon";
 import GardenBackground from "./GardenBackground";
+import CompanionQuiz from "./CompanionQuiz";
 import { Words, Magnetic } from "./motionKit";
 import { waLink } from "../lib/business";
 
@@ -129,6 +130,7 @@ const PetCard = forwardRef(function PetCard({ pet, index, canHover }, ref) {
 export default function CompanionsGallery() {
   const [filter, setFilter] = useState("all");
   const [canHover, setCanHover] = useState(true);
+  const [quizOpen, setQuizOpen] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
@@ -228,19 +230,18 @@ export default function CompanionsGallery() {
             Looking for someone special? <span>Tell us who you&apos;re dreaming of — we&apos;ll help you find them.</span>
           </p>
           <Magnetic strength={0.25}>
-            <motion.a
+            <motion.button
               className="gal-cta-btn"
-              href={waLink("Hi! I'm looking for a new companion. Could you help me find the right one?")}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => setQuizOpen(true)}
               whileHover={{ y: -3, boxShadow: "0 18px 40px rgba(201,154,74,.45)" }}
               whileTap={{ scale: 0.97 }}
             >
               <Icon name="paw" size={18} />
               Find my companion
               <Icon name="arrow" size={18} />
-            </motion.a>
+            </motion.button>
           </Magnetic>
+          <CompanionQuiz open={quizOpen} onClose={() => setQuizOpen(false)} />
         </motion.div>
       </div>
     </section>

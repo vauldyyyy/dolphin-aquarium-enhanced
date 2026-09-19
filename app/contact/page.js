@@ -11,17 +11,37 @@ import { ScrollProgress, Words, Magnetic } from "../../components/motionKit";
 
 export default function Contact() {
   const [status, setStatus] = useState("");
+  const [errors, setErrors] = useState({});
 
   const onSubmit = (e) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const g = (k) => (f.get(k) || "").toString().trim();
-    const subject = `Website enquiry: ${g("topic")}${g("name") ? " — " + g("name") : ""}`;
-    const body = `Name: ${g("name")}\nEmail: ${g("email")}\nPhone: ${g("phone")}\nTopic: ${g("topic")}\n\n${g("msg")}`;
-    window.location.href = `mailto:info@dolphinaquariumandpets.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    setStatus("Opening your email app… If nothing happens, WhatsApp us at +91 99538 58521.");
+
+    /* Client-side validation — nothing silently fails anymore. */
+    const errs = {};
+    if (g("name").length < 2) errs.name = "Please tell us your name.";
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(g("email"))) errs.email = "That email doesn't look right.";
+    if (g("phone") && !/^[\d+\s()-]{7,16}$/.test(g("phone"))) errs.phone = "Please check the phone number.";
+    setErrors(errs);
+    if (Object.keys(errs).length) return;
+
+    /* Primary path: WhatsApp — works on every phone, lands where the owner
+       actually answers. Email stays as a fallback. */
+    const lines = [
+      `*Website enquiry — ${g("topic")}*`,
+      ``,
+      `Name: ${g("name")}`,
+      g("phone") ? `Phone: ${g("phone")}` : null,
+      `Email: ${g("email")}`,
+      ``,
+      g("msg") || `(no message)`,
+    ].filter((l) => l !== null);
+    window.open(`https://wa.me/919953858521?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+
+    setStatus(
+      "Opening WhatsApp with your enquiry pre-filled — just hit send. Prefer email? Write to info@dolphinaquariumandpets.com."
+    );
   };
 
   return (
@@ -54,16 +74,19 @@ export default function Contact() {
                 <div className="f2-row">
                   <div className="f2">
                     <label htmlFor="name">Name</label>
-                    <input id="name" name="name" type="text" autoComplete="name" required />
+                    <input id="name" name="name" type="text" autoComplete="name" required aria-invalid={!!errors.name} />
+                    {errors.name && <p className="ferr">{errors.name}</p>}
                   </div>
                   <div className="f2">
                     <label htmlFor="phone">Phone</label>
-                    <input id="phone" name="phone" type="tel" autoComplete="tel" />
+                    <input id="phone" name="phone" type="tel" autoComplete="tel" aria-invalid={!!errors.phone} />
+                    {errors.phone && <p className="ferr">{errors.phone}</p>}
                   </div>
                 </div>
                 <div className="f2">
                   <label htmlFor="email">Email</label>
-                  <input id="email" name="email" type="email" autoComplete="email" required />
+                  <input id="email" name="email" type="email" autoComplete="email" required aria-invalid={!!errors.email} />
+                  {errors.email && <p className="ferr">{errors.email}</p>}
                 </div>
                 <div className="f2">
                   <label htmlFor="topic">Topic</label>
@@ -86,7 +109,7 @@ export default function Contact() {
                   whileHover={{ y: -2, boxShadow: "0 18px 40px rgba(63,166,91,.45)" }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Send enquiry
+                  Send enquiry via WhatsApp
                 </motion.button>
                 {status && (
                   <motion.p
