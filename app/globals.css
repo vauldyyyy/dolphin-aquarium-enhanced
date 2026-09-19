@@ -386,3 +386,27 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 .sound-toggle.on { background: linear-gradient(120deg, #0e5f63, #3fa65b); border-color: #bef2cf; }
 .sound-toggle .icon { opacity: .55; }
 .sound-toggle.on .icon { opacity: 1; }
+
+/* Sticky mobile action bar (Call · WhatsApp · Directions) */
+.sticky-actions { display: none; }
+@media (max-width: 720px) {
+  .sticky-actions {
+    display: grid; grid-template-columns: 1fr 1.3fr 1fr;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 160;
+    background: rgba(4,28,46,.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(182,236,245,.14);
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+  }
+  .sticky-actions a {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    font: inherit; font-size: .86rem; font-weight: 600; text-decoration: none;
+    color: #bef2cf; padding: 11px 6px; border-radius: 12px;
+  }
+  .sticky-actions a:active { background: rgba(182,236,245,.1); }
+  .sticky-actions .sa-wa { background: linear-gradient(120deg, #0e7a5f, #3fa65b); color: #fff; box-shadow: 0 6px 18px rgba(20,120,80,.4); }
+  /* The floating bubble would collide with the bar — retire it on phones */
+  .wa-float { display: none; }
+}
+@media (max-width: 720px) {
+  .site-foot { padding-bottom: calc(30px + 64px); }
+}

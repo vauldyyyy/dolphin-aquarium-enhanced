@@ -99,14 +99,34 @@ nearest-loaded-frame fallback so playback never stalls.
 
 ```bash
 npm install
-npm run dev
+npm run dev          # http://localhost:3000 (pass -p to change port)
 ```
-
-Open <http://localhost:3000>.
 
 ```bash
 npm run build && npm start   # production
 ```
+
+## Deploying to Vercel
+
+The site is a stock Next.js 14 App Router project with no server dependencies,
+so it deploys as-is:
+
+```bash
+npm i -g vercel
+vercel        # preview deployment
+vercel --prod # production
+```
+
+Or push the repo to GitHub and import it in the Vercel dashboard
+(framework preset: Next.js — no env vars needed). Point
+`dolphinaquariumandpets.com`'s DNS at Vercel when the owner signs off.
+
+**TODO before go-live** (also in `docs/QA-REPORT.md`):
+
+- Confirm shop product names/prices against live stock (they are indicative).
+- Confirm the WhatsApp number is WhatsApp-enabled (it is used for every CTA).
+- Confirm the Google Maps pin the address query resolves to.
+- The open/closed badge uses regular hours only — no holiday calendar.
 
 ## Project structure
 
@@ -120,11 +140,18 @@ components/
   ScrollSequence.jsx scroll-linked canvas + Beat overlays
   Nav.jsx            glass nav, dark→light theme switch, mobile menu
   Reveal.jsx         whileInView reveal helper
+  CompanionQuiz.jsx  "Find my companion" matcher → WhatsApp handoff
+  Immersion.jsx      bubble cursor trail + synthesized ocean ambience
+  StickyActions.jsx  mobile-only Call · WhatsApp · Directions bar
   SiteFooter.jsx
   useImageSequence.js frame preloader
+lib/
+  business.js        single source of truth: phone, WhatsApp, hours, map
+app/sitemap.js + app/robots.js   SEO plumbing
 public/frames/
   aquatic/  240 frames (1080×720)
   garden/   300 frames (1280×720)
+public/assets/products/  16 studio-style product photos (~110 KB each)
 ```
 
 ## Notes

@@ -1,4 +1,5 @@
 import { Fraunces, Inter, Great_Vibes } from "next/font/google";
+import StickyActions from "../components/StickyActions";
 import "./globals.css";
 import "./sections.css";
 
@@ -120,6 +121,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <StickyActions />
       </body>
     </html>
   );
