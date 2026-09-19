@@ -169,24 +169,14 @@ export default function SceneLayers({ preset }) {
    out of the water as you read the line. */
 export function SceneTransition() {
   const ref = useRef(null);
-  const calm = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const gardenOpacity = useTransform(scrollYProgress, [0.28, 0.72], [0, 1]);
   const underOpacity = useTransform(scrollYProgress, [0.28, 0.72], [1, 0]);
-  const near = useInView(ref, { margin: "300px 0px" });
 
   return (
     <div ref={ref} className="scene" aria-hidden="true">
       <motion.img className="scene-plate" src="/scene/transition-under.webp" alt="" loading="lazy" decoding="async" style={{ opacity: underOpacity, scale: 1.05 }} />
       <motion.img className="scene-plate" src="/scene/transition-garden.webp" alt="" loading="lazy" decoding="async" style={{ opacity: gardenOpacity, scale: 1.05 }} />
-      {near && (
-        <motion.img
-          src="/scene/transition-sprite-songbird.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"
-          style={{ position: "absolute", width: "7%", height: "auto", left: 0, top: "22%", opacity: 0.9 }}
-          animate={{ x: ["-20vw", "112vw"], y: [0, -30, 10, -20, 0] }}
-          transition={{ x: { duration: calm ? 40 : 24, repeat: Infinity, ease: "linear" }, y: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
-        />
-      )}
       <div className="scene-scrim scene-scrim--dark" style={{ "--s": 0.2 }} />
     </div>
   );
