@@ -25,8 +25,8 @@ import {
 } from "../components/motionKit";
 
 const EASE = [0.22, 0.61, 0.36, 1];
-const AQUATIC_COUNT = 240;
-const GARDEN_COUNT = 300;
+const AQUATIC_COUNT = 192;
+const GARDEN_COUNT = 240;
 const LOADER_MIN_MS = 3200;
 
 /* ----------------------------- Beats ----------------------------- */

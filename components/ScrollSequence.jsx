@@ -88,6 +88,8 @@ export default function ScrollSequence({
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
       const images = imagesRef.current || [];
       const idx = Math.max(0, Math.min(count - 1, Math.round(p * (count - 1))));
       const img = nearestFrame(images, idx, count);
