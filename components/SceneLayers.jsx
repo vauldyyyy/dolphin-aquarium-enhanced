@@ -36,13 +36,15 @@ const PRESETS = {
     effects: { variant: "forest", density: 0.5 },
     sprites: [],
   },
+  shop: {
+    plate: "services-plate", front: "services-front", scrim: "light", strength: 0.3, kb: 28, pos: "50% 52%",
+    effects: { variant: "forest", density: 0.45 },
+    sprites: [],
+  },
   why: {
     plate: "why-plate", scrim: "dark", strength: 0.38, kb: 22,
     effects: { variant: "aqua", density: 0.5 },
-    sprites: [
-      { file: "why-sprite-discus", n: 1, path: "right", w: [4, 4], top: [58, 58], dur: [36, 36], o: 0.9 },
-      { file: "why-sprite-bubbles", n: 3, path: "rise", w: [3, 5], top: [0, 0], dur: [16, 24], o: 0.55 },
-    ],
+    sprites: [{ file: "why-sprite-bubbles", n: 3, path: "rise", w: [3, 5], top: [0, 0], dur: [16, 24], o: 0.55 }],
   },
   founders: {
     plate: "founders-plate", front: "founders-front", scrim: "light", strength: 0.16, kb: 24,
@@ -51,14 +53,11 @@ const PRESETS = {
   },
   clients: {
     plate: "clients-plate", front: "clients-front", scrim: "light", strength: 0.18, kb: 24,
-    sprites: [{ file: "clients-sprite-gull", n: 2, path: "right", w: [4, 6], top: [16, 28], dur: [22, 30], o: 0.8 }],
+    sprites: [],
   },
   reviews: {
     plate: "reviews-plate", scrim: "light", strength: 0.18, kb: 28,
-    sprites: [
-      { file: "reviews-sprite-lantern", n: 4, path: "rise", w: [1.6, 2.6], top: [0, 0], dur: [26, 38], o: 0.9 },
-      { file: "reviews-sprite-bird", n: 5, path: "right", w: [2.5, 4], top: [10, 30], dur: [18, 24], o: 0.65 },
-    ],
+    sprites: [{ file: "reviews-sprite-lantern", n: 4, path: "rise", w: [1.6, 2.6], top: [0, 0], dur: [26, 38], o: 0.9 }],
   },
   heart: {
     plate: "heart-plate", scrim: "dark", strength: 0.36, kb: 26,

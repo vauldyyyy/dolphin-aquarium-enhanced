@@ -6,7 +6,7 @@ import Nav from "../../components/Nav";
 import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
 import WhatsAppFloat from "../../components/WhatsAppFloat";
-import LiveBackground from "../../components/LiveBackground";
+import SceneLayers from "../../components/SceneLayers";
 import { ScrollProgress, Words } from "../../components/motionKit";
 
 const WA_NUMBER = "919953858521";
@@ -80,7 +80,7 @@ export default function Shop() {
       <Nav staticLight />
       <main>
         <section className="page-top has-live-bg">
-          <LiveBackground variant="forest" density={0.8} />
+          <SceneLayers preset="shop" />
           <Reveal className="wrap">
             <p className="crumbs">
               <a href="/">Home</a> / Shop
