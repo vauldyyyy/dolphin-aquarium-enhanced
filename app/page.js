@@ -145,10 +145,11 @@ const gardenBeats = [
 
 /* ----------------------------- Page ----------------------------- */
 export default function Home() {
-  // read straight from the URL (not state) so the preview never starts the
-  // 43 MB frame download it has no use for
+  // Chapters play as looping video by default; ?bg=scroll brings back the
+  // scroll-scrubbed frame sequences. Read from the URL (not state) so the
+  // 43 MB of frames is only fetched when that mode is actually asked for.
   const skipFrames =
-    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("bg") === "video";
+    typeof window === "undefined" || new URLSearchParams(window.location.search).get("bg") !== "scroll";
   const aquatic = useImageSequence("/frames/aquatic", AQUATIC_COUNT, !skipFrames);
   // Garden starts loading once the aquatic chapter has fully arrived
   const garden = useImageSequence("/frames/garden", GARDEN_COUNT, aquatic.done && !skipFrames);
@@ -163,12 +164,12 @@ export default function Home() {
   // Visiting /?loader keeps it open (looping) for previewing the design.
   const [minDone, setMinDone] = useState(false);
   const [preview, setPreview] = useState(false);
-  // /?bg=video — preview mode: chapters loop their footage instead of being scrubbed
+  // chapters loop their footage instead of being scroll-scrubbed (?bg=scroll opts out)
   const [videoMode, setVideoMode] = useState(false);
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     setPreview(q.has("loader"));
-    setVideoMode(q.get("bg") === "video");
+    setVideoMode(q.get("bg") !== "scroll");
     const id = setTimeout(() => setMinDone(true), LOADER_MIN_MS);
     return () => clearTimeout(id);
   }, []);
