@@ -10,7 +10,7 @@ const MESSAGES = ["Waking up the jungle", "Untangling the vines", "Feeding the f
    clip, so the progress bar is pinned to it by mapping these coordinates
    through the same cover-fit the <video> uses. */
 const VIDEO = { w: 1280, h: 720 };
-const BRANCH = { x0: 372, x1: 914, cy: 390, h: 24 };
+const BRANCH = { x0: 376, x1: 896, cy: 392, h: 26 };
 
 /* A vine that grows along the branch (drawn in the bar's own pixel space so
    leaves and flowers never stretch). */
