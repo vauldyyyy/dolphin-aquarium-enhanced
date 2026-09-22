@@ -492,3 +492,8 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 /* eyebrows over the painted light scenes: gold-on-gold reads badly */
 #founders .eyebrow--gold, #clients .eyebrow--gold { color: #4a3317; text-shadow: 0 1px 2px rgba(255,248,235,.5); }
 .rwall .eyebrow--gold { color: #4b3350; text-shadow: 0 1px 2px rgba(255,248,235,.5); }
+
+/* ---------- /?bg=video preview: chapters as looping footage ---------- */
+.vchapter { position: relative; height: 100vh; min-height: 560px; overflow: hidden; isolation: isolate; }
+.vchapter-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.vchapter .vignette, .vchapter .beats { position: absolute; inset: 0; z-index: 1; }

@@ -9,6 +9,7 @@ import VisitWorld from "../components/VisitWorld";
 import ForestLoader from "../components/ForestLoader";
 import SectionVideo from "../components/SectionVideo";
 import SceneLayers, { SceneTransition } from "../components/SceneLayers";
+import VideoChapter from "../components/VideoChapter";
 import HeartSection from "../components/HeartSection";
 import SiteFooter from "../components/SiteFooter";
 import WhatsAppFloat from "../components/WhatsAppFloat";
@@ -144,22 +145,30 @@ const gardenBeats = [
 
 /* ----------------------------- Page ----------------------------- */
 export default function Home() {
-  const aquatic = useImageSequence("/frames/aquatic", AQUATIC_COUNT, true);
+  // read straight from the URL (not state) so the preview never starts the
+  // 43 MB frame download it has no use for
+  const skipFrames =
+    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("bg") === "video";
+  const aquatic = useImageSequence("/frames/aquatic", AQUATIC_COUNT, !skipFrames);
   // Garden starts loading once the aquatic chapter has fully arrived
-  const garden = useImageSequence("/frames/garden", GARDEN_COUNT, aquatic.done);
+  const garden = useImageSequence("/frames/garden", GARDEN_COUNT, aquatic.done && !skipFrames);
 
   // Brief intro while the opening frames buffer; the sequence falls back to the
   // nearest decoded frame, so the remainder streams in behind it.
   const BUFFER = 30;
-  const ready = aquatic.loaded >= BUFFER || aquatic.done;
-  const pct = Math.min(100, Math.round((aquatic.loaded / BUFFER) * 100));
+  const ready = skipFrames || aquatic.loaded >= BUFFER || aquatic.done;
+  const pct = skipFrames ? 100 : Math.min(100, Math.round((aquatic.loaded / BUFFER) * 100));
 
   // Give the jungle loader a moment on screen even on fast connections.
   // Visiting /?loader keeps it open (looping) for previewing the design.
   const [minDone, setMinDone] = useState(false);
   const [preview, setPreview] = useState(false);
+  // /?bg=video — preview mode: chapters loop their footage instead of being scrubbed
+  const [videoMode, setVideoMode] = useState(false);
   useEffect(() => {
-    setPreview(new URLSearchParams(window.location.search).has("loader"));
+    const q = new URLSearchParams(window.location.search);
+    setPreview(q.has("loader"));
+    setVideoMode(q.get("bg") === "video");
     const id = setTimeout(() => setMinDone(true), LOADER_MIN_MS);
     return () => clearTimeout(id);
   }, []);
@@ -178,16 +187,20 @@ export default function Home() {
 
       <main id="main">
         {/* ---------- Chapter 1 — Aquatic ---------- */}
-        <ScrollSequence
-          id="aquatics"
-          imagesRef={aquatic.imagesRef}
-          count={AQUATIC_COUNT}
-          loaded={aquatic.loaded}
-          heightVh={460}
-          theme="dark"
-          bg="#050505"
-          beats={aquaticBeats}
-        />
+        {videoMode ? (
+          <VideoChapter id="aquatics" name="aquatics" theme="dark" bg="#050505" beats={aquaticBeats} />
+        ) : (
+          <ScrollSequence
+            id="aquatics"
+            imagesRef={aquatic.imagesRef}
+            count={AQUATIC_COUNT}
+            loaded={aquatic.loaded}
+            heightVh={460}
+            theme="dark"
+            bg="#050505"
+            beats={aquaticBeats}
+          />
+        )}
 
         {/* ---------- Interlude ---------- */}
         <section className="interlude has-live-bg amb-ocean" id="care" data-nav="dark">
@@ -224,16 +237,20 @@ export default function Home() {
         </section>
 
         {/* ---------- Chapter 2 — Garden ---------- */}
-        <ScrollSequence
-          id="companions"
-          imagesRef={garden.imagesRef}
-          count={GARDEN_COUNT}
-          loaded={garden.loaded}
-          heightVh={520}
-          theme="warm"
-          bg="#f6f1e8"
-          beats={gardenBeats}
-        />
+        {videoMode ? (
+          <VideoChapter id="companions" name="companions" theme="warm" bg="#f6f1e8" beats={gardenBeats} />
+        ) : (
+          <ScrollSequence
+            id="companions"
+            imagesRef={garden.imagesRef}
+            count={GARDEN_COUNT}
+            loaded={garden.loaded}
+            heightVh={520}
+            theme="warm"
+            bg="#f6f1e8"
+            beats={gardenBeats}
+          />
+        )}
 
         {/* ---------- Companions gallery ---------- */}
         <CompanionsGallery />
