@@ -30,6 +30,8 @@ const SITE_URL = "https://dolphinaquariumandpets.com";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
+  authors: [{ name: "Vauldan D'Souza", url: "https://github.com/vauldyyyy" }],
+  creator: "Vauldan D'Souza",
   title: {
     default: "Dolphin Aquarium & Pets — Goa's Premier Aquarium & Pet Store | Madgaon, Goa",
     template: "%s | Dolphin Aquarium & Pets",

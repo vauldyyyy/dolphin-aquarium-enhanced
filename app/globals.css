@@ -320,6 +320,22 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 .site-foot a { display: block; padding: 4px 0; }
 .site-foot h5 { color: #fff; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
 .site-foot .fb { margin-top: 28px; width: 100%; border-top: 1px solid rgba(255,255,255,.1); padding-top: 18px; font-size: .82rem; }
+.site-foot .fb > span { display: block; }
+.site-foot .site-credit { margin-top: 6px; color: rgba(247,244,233,.76); }
+.site-foot .site-credit a { display: inline; padding: 0; color: #f0d593; text-decoration: underline; text-underline-offset: 3px; }
+.site-foot .site-credit a:hover { color: #fff; }
+
+/* Rights page */
+.rights-body { max-width: 880px; }
+.rights-body .rights-credit { padding: clamp(28px, 5vw, 48px); border: 1px solid rgba(42,33,24,.1); border-radius: 22px; background: #fff; box-shadow: 0 14px 40px rgba(42,33,24,.06); }
+.rights-body h2 { font-family: var(--font-fraunces), Georgia, serif; font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.2; color: var(--espresso); margin: 8px 0 14px; }
+.rights-body h3 { font-family: var(--font-fraunces), Georgia, serif; font-size: 1.35rem; color: var(--espresso); margin-bottom: 10px; }
+.rights-body p { color: rgba(42,33,24,.76); line-height: 1.75; }
+.rights-body a { color: #206746; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.rights-body a:focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 3px; }
+.rights-sections { display: grid; gap: 32px; margin-top: 42px; }
+.rights-sections section { padding-bottom: 28px; border-bottom: 1px solid rgba(42,33,24,.13); }
+.rights-sections section:last-child { border-bottom: 0; padding-bottom: 0; }
 
 /* ---------- Loader ---------- */
 .loader { position: fixed; inset: 0; z-index: 1000; background: var(--void); display: grid; place-items: center; }
