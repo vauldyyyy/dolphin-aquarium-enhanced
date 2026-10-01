@@ -54,8 +54,13 @@ export default function SiteFooter() {
           </motion.a>
         </div>
         <div className="fb">
-          © {new Date().getFullYear()} Dolphin Aquarium &amp; Pets · Madgaon, Goa · Ethically
-          sourced. Lovingly raised.
+          <span>© {new Date().getFullYear()} Dolphin Aquarium &amp; Pets · Madgaon, Goa · Ethically sourced. Lovingly raised.</span>
+          <span className="site-credit">
+            Website created by <a href="https://github.com/vauldyyyy" target="_blank" rel="noopener noreferrer">Vauldan D&apos;Souza</a>
+            <span> · Original site work © {new Date().getFullYear()} Vauldan D&apos;Souza. All rights reserved.</span>
+            <span aria-hidden="true"> · </span>
+            <Link href="/rights">Rights &amp; permissions</Link>
+          </span>
         </div>
       </div>
     </footer>

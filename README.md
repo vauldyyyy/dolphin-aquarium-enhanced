@@ -1,5 +1,14 @@
 # Dolphin Aquarium & Pets — Scrollytelling Site
 
+**Creator credit:** Website created by Vauldan D'Souza for Dolphin Aquarium & Pets.
+Original site design, code, copy, and visuals © 2026 Vauldan D'Souza. All rights
+reserved to the extent protected by law. This project is not offered under an
+open-source licence. Public access to this repository is not permission to
+republish the original site or claim its work as your own, subject to uses
+permitted by law and GitHub's platform terms. Business names, facts, reviews,
+and third-party material remain subject to their respective owners' rights.
+See the site's [Rights & permissions](https://dolphin-aquarium-enhanced.vercel.app/rights) page.
+
 A cinematic, Apple-style scrollytelling website for **Dolphin Aquarium & Pets**
 (Madgaon, Goa — since 1992), built with **Next.js 14 (App Router)** and
 **Framer Motion**.
