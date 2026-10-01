@@ -53,7 +53,7 @@ export default function Contact() {
           <LiveBackground variant="forest" density={0.8} />
           <Reveal className="wrap">
             <p className="crumbs">
-              <a href="/">Home</a> / Contact
+              <a href="/">Home</a> / Contact Us
             </p>
             <p className="eyebrow eyebrow--gold">Get in touch</p>
             <Words className="display" text="Visit Us in Madgaon, Goa" as={motion.h1} />

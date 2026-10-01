@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";
 import Reveal from "../components/Reveal";
@@ -317,6 +318,9 @@ export default function Home() {
                       <li key={it}>{it}</li>
                     ))}
                   </ul>
+                  <Link className="service-book-link" href="/appointment">
+                    Book Your Appointment <span aria-hidden="true">→</span>
+                  </Link>
                 </Reveal>
               ))}
             </div>
@@ -412,21 +416,21 @@ export default function Home() {
                   img: "/assets/bernard.jpg",
                   n: "Mr. Bernard Dominic Dias",
                   r: "Founder & Chairman",
-                  b: "A former Airport Manager, Mr. Dias turned his lifelong passion for aquatics and animals into Dolphin Aquarium & Pets. His vision and discipline laid the foundation for Goa's most trusted pet brand.",
+                  b: "Former Airport Manager by profession, Mr. Dias transformed his lifelong passion for aquatics and animals into what is today Dolphin Aquarium & Pets. His vision, discipline, and deep understanding of systems laid the foundation for Goa's most trusted pet brand.",
                 },
                 {
                   m: "CD",
                   img: "/assets/celine.jpg",
                   n: "Ms. Celine Felecia Dias",
                   r: "Co-Founder & Vice Chairman",
-                  b: "A former Director at Volga Engineers, Bethora, Ms. Dias professionally scaled the brand. Her leadership and operational excellence propelled it to industry recognition.",
+                  b: "Former Director at Volga Engineers, Bethora, Goa, Ms. Dias played a pivotal role in professionally scaling the brand. Her leadership, strategic acumen, and operational excellence propelled Dolphin Aquarium & Pets to industry recognition and landmark milestones.",
                 },
                 {
                   m: "AD",
                   img: "/assets/alistair.jpg",
                   n: "Mr. Alistair Dias",
                   r: "Managing Director",
-                  b: "With international experience across aviation and luxury hospitality — SpiceJet, Marriott, Virgin Voyages, Radisson, Qatar Airways and Seabourn — Alistair brings world-class service standards to every vertical he leads.",
+                  b: "Alistair brings international experience across aviation and luxury hospitality. He served as an In-Flight Manager with SpiceJet and worked as a professional chef with global brands including Marriott, Virgin Voyages, Radisson, Qatar Airways, and Seabourn Cruises. His background in in-flight services, culinary excellence, and customer experience at a global level combines with operational leadership and world-class service standards to drive excellence across every vertical he leads.",
                 },
               ].map((f, i) => (
                 <Reveal className="founder" key={f.m} delay={i * 0.12} whileHover={{ y: -6 }}>
