@@ -21,7 +21,8 @@ export default function SiteFooter() {
           <Link href="/">Home</Link>
           <Link href="/shop">Shop</Link>
           <Link href="/care-guides">Care Guides</Link>
-          <Link href="/contact">Contact</Link>
+          <Link href="/appointment">Book Your Appointment</Link>
+          <Link href="/contact">Contact Us</Link>
         </div>
         <div>
           <h5>Visit</h5>
