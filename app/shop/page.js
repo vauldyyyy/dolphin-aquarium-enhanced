@@ -1,107 +1,50 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Nav from "../../components/Nav";
 import Reveal from "../../components/Reveal";
 import SiteFooter from "../../components/SiteFooter";
 import WhatsAppFloat from "../../components/WhatsAppFloat";
 import SceneLayers from "../../components/SceneLayers";
 import { ScrollProgress, Words } from "../../components/motionKit";
+import { waLink } from "../../lib/business";
+import { GROUPS, FILTERS } from "../../lib/catalog";
 
-const WA_NUMBER = "919953858521";
-const waEnquire = (product, price) =>
-  `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
-    `Hi Dolphin Aquarium & Pets! I'm interested in the *${product}* (${price}) from your website. Is it available, and can you share more details?`
-  )}`;
-
-const GROUPS = [
-  {
-    id: "aquariums",
-    title: "Designer & Custom Aquariums",
-    tone: "content--cream",
-    items: [
-      { name: "Nano Cube Tank", cat: "Aquarium", price: "from ₹3,500", img: "/assets/products/nano-cube.jpg", alt: "Nano cube aquarium with moss and red shrimp" },
-      { name: "2ft Planted Setup", cat: "Aquarium", price: "from ₹8,900", img: "/assets/products/planted-2ft.jpg", alt: "Two-foot planted aquarium on a wooden cabinet" },
-      { name: "4ft Custom Tank", cat: "Custom Build", price: "Quote", img: "/assets/products/custom-4ft.jpg", alt: "Four-foot custom aquarium with blue LED lighting" },
-      { name: "Reef-Ready System", cat: "Marine", price: "Quote", img: "/assets/products/reef-system.jpg", alt: "Reef aquarium with live corals and a clownfish" },
-    ],
-  },
-  {
-    id: "fish",
-    title: "Exotic & Ornamental Fish",
-    tone: "content--sand",
-    items: [
-      { name: "Fancy Goldfish", cat: "Freshwater", price: "from ₹150", img: "/assets/products/goldfish.jpg", alt: "Fancy goldfish with flowing double tail" },
-      { name: "Betta (Fighter)", cat: "Freshwater", price: "from ₹120", img: "/assets/products/betta.jpg", alt: "Red and blue halfmoon betta with flared fins" },
-      { name: "Discus", cat: "Premium", price: "Quote", img: "/assets/products/discus.jpg", alt: "Three red-turquoise discus fish in a dark aquarium" },
-      { name: "Koi Carp", cat: "Pond", price: "Quote", img: "/assets/products/koi.jpg", alt: "Koi carp with orange, white and black pattern" },
-    ],
-  },
-  {
-    id: "plants",
-    title: "Live Plants & Hardscape",
-    tone: "content--cream",
-    items: [
-      { name: "Anubias Nana", cat: "Live Plant", price: "from ₹120", img: "/assets/products/anubias.jpg", alt: "Potted Anubias nana aquarium plant" },
-      { name: "Java Fern", cat: "Live Plant", price: "from ₹100", img: "/assets/products/java-fern.jpg", alt: "Java fern attached to driftwood" },
-      { name: "Aqua Soil", cat: "Substrate", price: "from ₹600", img: "/assets/products/aqua-soil.jpg", alt: "Bag of aquascaping soil substrate" },
-      { name: "Driftwood", cat: "Hardscape", price: "from ₹250", img: "/assets/products/driftwood.jpg", alt: "Twisted aquascaping driftwood piece" },
-    ],
-  },
-  {
-    id: "care",
-    title: "Food, Accessories & Essentials",
-    tone: "content--sand",
-    warm: true,
-    items: [
-      { name: "Premium Dog Food", cat: "Nutrition", price: "from ₹450", img: "/assets/products/dog-food.jpg", alt: "Premium bag of dog food with a bowl of kibble" },
-      { name: "Filtration Systems", cat: "Equipment", price: "from ₹900", img: "/assets/products/filtration.jpg", alt: "Modern aquarium canister filter with hoses" },
-      { name: "Grooming Essentials", cat: "Grooming", price: "from ₹350", img: "/assets/products/grooming.jpg", alt: "Pet grooming kit with brushes and shampoo" },
-      { name: "Cages & Aviaries", cat: "Accessories", price: "Quote", img: "/assets/products/aviary.jpg", alt: "Handcrafted bird aviary with a green parrot" },
-    ],
-  },
-];
-
-const FILTERS = [
-  ["all", "Everything"],
-  ["aquariums", "Aquariums"],
-  ["fish", "Fish"],
-  ["plants", "Plants & Hardscape"],
-  ["care", "Food & Essentials"],
-];
+function enquiryFor(item) {
+  return item.enquiry || `Hi Dolphin Aquarium & Pets! I'm interested in ${item.name}. Is it available, and can you share more details?`;
+}
 
 export default function Shop() {
   const [filter, setFilter] = useState("all");
+  const [fishQuery, setFishQuery] = useState("");
 
   return (
     <>
       <ScrollProgress />
       <Nav staticLight />
-      <main>
+      <main id="main">
         <section className="page-top has-live-bg">
           <SceneLayers preset="shop" />
           <Reveal className="wrap">
-            <p className="crumbs">
-              <a href="/">Home</a> / Shop
-            </p>
+            <p className="crumbs"><a href="/">Home</a> / Shop</p>
             <p className="eyebrow eyebrow--gold">Our collections</p>
             <Words className="display" text="Shop Aquariums, Fish & Essentials" as={motion.h1} />
             <p className="content-lede">
-              A curated selection from our Madgaon showroom. Prices are indicative — message us on
-              WhatsApp for live availability, sizing and custom builds.
+              Discover designer aquariums, custom tanks, live fish, plants and care essentials.
+              Message our Madgaon team for current availability and a tailored quote.
             </p>
           </Reveal>
         </section>
 
-        <section className="content content--cream shop-filter-bar">
+        <section className="content content--cream shop-filter-bar" aria-label="Shop categories">
           <div className="wrap">
-            <div className="chip-row" role="tablist" aria-label="Filter products">
+            <div className="chip-row" role="group" aria-label="Filter products">
               {FILTERS.map(([id, label]) => (
                 <button
                   key={id}
-                  role="tab"
-                  aria-selected={filter === id}
+                  type="button"
+                  aria-pressed={filter === id}
                   className={`chip${filter === id ? " chip--on" : ""}`}
                   onClick={() => setFilter(id)}
                 >
@@ -112,51 +55,47 @@ export default function Shop() {
           </div>
         </section>
 
-        {GROUPS.map((g) => {
-          if (filter !== "all" && filter !== g.id) return null;
+        {GROUPS.map((group) => {
+          if (filter !== "all" && filter !== group.id) return null;
+          const items = group.id === "fish"
+            ? group.items.filter((item) => item.name.toLowerCase().includes(fishQuery.trim().toLowerCase()))
+            : group.items;
           return (
-            <section className={`content ${g.tone}`} id={g.id} key={g.id}>
+            <section className={`content ${group.tone}`} id={group.id} key={group.id}>
               <div className="wrap">
                 <Reveal>
-                  <h2 className="sec-title">{g.title}</h2>
+                  <h2 className="sec-title">{group.title}</h2>
+                  <p className="shop-group-intro">{group.intro}</p>
                 </Reveal>
-                <motion.div className="cards-4" layout>
-                  <AnimatePresence mode="popLayout">
-                    {g.items.map((p, i) => (
-                      <motion.div
-                        key={p.name}
-                        layout
-                        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.96 }}
-                        transition={{ duration: 0.35, delay: i * 0.05 }}
-                        whileHover={{ y: -6, boxShadow: "0 22px 50px rgba(42,33,24,.14)" }}
-                        className={`pcard${g.warm ? " warm" : ""}`}
-                      >
-                        <div className="banner has-img">
-                          <img src={p.img} alt={p.alt} loading="lazy" />
+                {group.id === "fish" && (
+                  <div className="shop-search">
+                    <label htmlFor="fish-search">Find a fish</label>
+                    <input id="fish-search" type="search" placeholder="Search arowana, gar, stingray…" value={fishQuery} onChange={(event) => setFishQuery(event.target.value)} />
+                    <span>{items.length} listings</span>
+                  </div>
+                )}
+                <div className="cards-4 shop-cards">
+                  {items.map((item) => (
+                    <article className={`pcard shop-card${group.warm ? " warm" : ""}`} key={item.name}>
+                      <div className="banner has-img">
+                        <img src={item.img} alt={item.imageNote ? `${item.name} — ${item.imageNote.toLowerCase()}` : item.name} loading="lazy" />
+                      </div>
+                      <div className="pb">
+                        <span className="cat">{item.cat}</span>
+                        <h3>{item.name}</h3>
+                        {item.desc && <p className="desc">{item.desc}</p>}
+                        {item.imageNote && <p className="shop-image-note">{item.imageNote}</p>}
+                        <div className="prow">
+                          {item.price && <span className="price">{item.price}</span>}
+                          <a className="mini-btn" href={waLink(enquiryFor(item))} target="_blank" rel="noopener noreferrer">
+                            {item.cta || "Enquire"}
+                          </a>
                         </div>
-                        <div className="pb">
-                          <span className="cat">{p.cat}</span>
-                          <h3>{p.name}</h3>
-                          <div className="prow">
-                            <span className="price">{p.price}</span>
-                            <motion.a
-                              className="mini-btn"
-                              href={waEnquire(p.name, p.price)}
-                              target="_blank"
-                              rel="noopener"
-                              whileHover={{ borderColor: "#3fa65b", color: "#3fa65b" }}
-                              whileTap={{ scale: 0.96 }}
-                            >
-                              Enquire
-                            </motion.a>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </motion.div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+                {items.length === 0 && <p className="shop-no-results">No fish match that search. Try another name or contact us for help.</p>}
               </div>
             </section>
           );

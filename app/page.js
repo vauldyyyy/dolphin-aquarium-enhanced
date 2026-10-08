@@ -273,7 +273,7 @@ export default function Home() {
             <div className="cards-3">
               {[
                 {
-                  t: "Aquatics & Aquascaping",
+                  t: "Tank & Pond Maintenance",
                   img: "/assets/aquarium.jpg",
                   items: [
                     "Designer & custom-built aquariums",
@@ -288,9 +288,9 @@ export default function Home() {
                   img: "/assets/pet-lifestyle.jpg",
                   items: [
                     "Domestic & aided animals",
-                    "Premium pet food & nutrition",
+                    "Grooming and hygiene essentials",
                     "Luxury pet accessories",
-                    "Walk-in aviaries (design & execution)",
+                    "Custom cage design and execution",
                     "Pet grooming",
                   ],
                 },
@@ -335,7 +335,7 @@ export default function Home() {
                     ["/assets/products/planted-2ft.jpg", "Planted aquascapes"],
                     ["/assets/products/reef-system.jpg", "Marine & reef systems"],
                     ["/assets/products/koi.jpg", "Koi ponds"],
-                    ["/assets/products/aviary.jpg", "Walk-in aviaries"],
+                    ["/assets/products/aviary.jpg", "Custom cages"],
                     ["/assets/products/grooming.jpg", "Pet grooming"],
                     ["/assets/care-safety.jpg", "Vaccinations & microchipping"],
                     ["/assets/golden-retriever.jpg", "Ethically raised puppies"],
@@ -475,6 +475,12 @@ export default function Home() {
 
         <HeartSection />
         <VisitWorld />
+        <aside className="creator-strip" aria-label="Website creator credit">
+          <div className="wrap">
+            <p>Website designed and developed by <strong>Vauldan D&apos;Souza</strong>.</p>
+            <Link href="/rights">Creator credit &amp; rights <span aria-hidden="true">→</span></Link>
+          </div>
+        </aside>
       </main>
       <SiteFooter />
       <WhatsAppFloat />

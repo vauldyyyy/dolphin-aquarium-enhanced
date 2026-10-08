@@ -22,7 +22,7 @@ export default function RightsPage() {
               <h2>Website created by Vauldan D&apos;Souza.</h2>
               <p>
                 This website was designed and developed for Dolphin Aquarium &amp; Pets.
-                Original site design, code, copy, and visuals © {new Date().getFullYear()}
+                Original site design, code, copy, and original visuals © {new Date().getFullYear()}
                 {" "}Vauldan D&apos;Souza. All rights reserved to the extent protected by law.
               </p>
             </div>
