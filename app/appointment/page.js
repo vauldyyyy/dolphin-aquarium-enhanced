@@ -15,7 +15,7 @@ const services = [
     imageAlt: "Pet grooming products and accessories",
     category: "LOOK & FEEL",
     description: "A little extra care to help your companion feel comfortable and look their best.",
-    details: ["Coat and skin care", "Bathing and tidy-ups", "Species-appropriate advice"],
+    details: ["Tick and flea treatment", "Dandruff treatment", "Bathing and tidy-ups", "Species-appropriate advice"],
   },
   {
     title: "Health & treatment enquiry",
@@ -34,12 +34,12 @@ const services = [
     details: ["Vaccination enquiries", "Microchipping", "Nutrition and care advice"],
   },
   {
-    title: "Aquatic & habitat care",
+    title: "Tank & Pond Maintenance",
     image: "/assets/aquarium.jpg",
     imageAlt: "Aquarium with aquatic plants and fish",
     category: "FINS & HABITATS",
-    description: "Support for fish, aquariums and the systems that keep a habitat healthy.",
-    details: ["Fish care concerns", "Water and filtration", "Aquarium maintenance"],
+    description: "Support for tanks, ponds and the systems that keep a habitat healthy.",
+    details: ["Water and filtration", "Tank cleaning", "Pond maintenance"],
   },
 ];
 

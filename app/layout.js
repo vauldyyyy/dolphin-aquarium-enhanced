@@ -37,7 +37,7 @@ export const metadata = {
     template: "%s | Dolphin Aquarium & Pets",
   },
   description:
-    "Goa's most trusted aquarium & pet destination since 1992. Designer & custom-built aquariums, exotic fish, premium pets, walk-in aviaries, grooming, microchipping and luxury pet supplies — all under one roof in Madgaon.",
+    "Goa's most trusted aquarium & pet destination since 1992. Designer and custom-built aquariums, exotic fish, premium pets, custom cages, grooming, microchipping and pet care essentials — all under one roof in Madgaon.",
   keywords: [
     "aquarium shop Goa",
     "pet store Madgaon",
