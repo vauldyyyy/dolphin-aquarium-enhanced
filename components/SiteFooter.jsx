@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import SectionVideo from "./SectionVideo";
 import SceneLayers from "./SceneLayers";
+import BrandLogo from "./BrandLogo";
 
 export default function SiteFooter() {
   return (
@@ -11,7 +12,9 @@ export default function SiteFooter() {
       <SectionVideo name="footer" scrim="dark" scrimStrength={0.6} opacity={0.7} fallback={<SceneLayers preset="footer" />} />
       <div className="wrap">
         <div>
-          <div className="logo">DOLPHIN</div>
+          <Link href="/" className="footer-brand" aria-label="Dolphin Aquarium & Pets — home">
+            <BrandLogo className="footer-logo-img" />
+          </Link>
           <p style={{ maxWidth: 250, marginTop: 10 }}>
             Aquarium &amp; Pets — Goa&apos;s premier aquatic &amp; pet destination since 1992.
           </p>
