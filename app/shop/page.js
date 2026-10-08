@@ -76,7 +76,7 @@ export default function Shop() {
                 )}
                 <div className="cards-4 shop-cards">
                   {items.map((item) => (
-                    <article className={`pcard shop-card${group.warm ? " warm" : ""}`} key={item.name}>
+                    <article className={`pcard shop-card${group.warm ? " warm" : ""}${group.id === "fish" ? " shop-card--fish" : ""}`} key={item.name}>
                       <div className="banner has-img">
                         <img src={item.img} alt={item.imageNote ? `${item.name} — ${item.imageNote.toLowerCase()}` : item.name} loading="lazy" />
                       </div>

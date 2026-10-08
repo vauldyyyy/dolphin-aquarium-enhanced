@@ -24,7 +24,7 @@ export default function ImageCreditsPage() {
         </header>
         <section className="content content--cream">
           <div className="wrap rights-body image-credits">
-            <p>These photos illustrate species and are not images of fish currently in stock. The albino arowana and albino alligator gar images are AI generated illustrations.</p>
+            <p>Catalog photos are representative and do not show fish currently in stock. Cards labelled “Illustrative image” use AI generated artwork to show the named variety and colour; they are not photographs of stock fish.</p>
             <ul>
               {credits.map((credit) => (
                 <li key={credit.file}>
