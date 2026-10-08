@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import Icon from "./Icon";
+import BrandLogo from "./BrandLogo";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -73,23 +74,7 @@ export default function Nav({ staticLight = false }) {
       >
         <div className="nav-inner">
           <Link href="/" className="nav-brand" aria-label="Dolphin Aquarium & Pets — home">
-            <motion.img
-              className="nav-logo-img"
-              src="/assets/logo-white.png"
-              alt="Dolphin Aquarium & Pets"
-              initial={false}
-              animate={{ opacity: light ? 0 : 1 }}
-              transition={{ duration: 0.45, ease: EASE }}
-            />
-            <motion.img
-              className="nav-logo-img nav-logo-img--over"
-              src="/assets/logo-mark.png"
-              alt=""
-              aria-hidden="true"
-              initial={false}
-              animate={{ opacity: light ? 1 : 0 }}
-              transition={{ duration: 0.45, ease: EASE }}
-            />
+            <BrandLogo className="nav-logo-img" />
           </Link>
 
           <motion.nav

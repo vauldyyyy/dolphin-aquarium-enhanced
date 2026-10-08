@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BrandLogo from "./BrandLogo";
 
 const EASE = [0.22, 0.61, 0.36, 1];
 const MESSAGES = ["Waking up the jungle", "Untangling the vines", "Feeding the fish", "Counting the parrots"];
@@ -179,14 +180,14 @@ export default function ForestLoader({ progress = 0, minMs = 3200, demo = false 
       <div className="fl-scrim" />
 
       <div className="fl-top">
-        <motion.img
+        <motion.div
           className="fl-logo"
-          src="/assets/logo-white.png"
-          alt="Dolphin Aquarium & Pets"
           initial={{ opacity: 0, y: -14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASE }}
-        />
+        >
+          <BrandLogo />
+        </motion.div>
         <motion.p
           className="fl-tag"
           initial={{ opacity: 0 }}
