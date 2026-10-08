@@ -12,10 +12,8 @@ const LINKS = [
   { href: "/#founders", label: "Founders" },
   { href: "/#reviews", label: "Clients" },
   { href: "/shop", label: "Shop" },
-  { href: "/careers", label: "Careers" },
   { href: "/appointment", label: "Book Your Appointment" },
   { href: "/contact", label: "Contact Us" },
-  { href: "/rights", label: "Creator & Rights" },
 ];
 
 const EASE = [0.22, 0.61, 0.36, 1];

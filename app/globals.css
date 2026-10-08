@@ -58,10 +58,10 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 .nav-logo { font-family: var(--font-fraunces), Georgia, serif; font-weight: 600; font-size: 1.2rem; letter-spacing: .28em; padding-left: .28em; }
 .nav-logo-img { height: 52px; width: auto; display: block; }
 @media (max-width: 520px) { .nav-logo-img { height: 38px; } }
-.nav-links { display: flex; gap: 6px; }
-.nav-links a { font-size: 15.5px; font-weight: 500; transition: color .3s; padding: 10px 15px; display: inline-block; }
-@media (min-width: 1351px) and (max-width: 1500px) { .nav-links a { padding-left: 10px; padding-right: 10px; font-size: 14.5px; } }
-.nav-cta { font-size: 15.5px; font-weight: 600; color: #fff; padding: 13px 26px; border-radius: 999px; }
+.nav-links { display: flex; flex: 1; align-items: center; justify-content: space-evenly; gap: clamp(8px, 1.2vw, 22px); min-width: 0; }
+.nav-links a { font-size: 15.5px; font-weight: 500; transition: color .3s; padding: 10px 2px; display: inline-block; text-align: center; white-space: nowrap; }
+@media (min-width: 1351px) and (max-width: 1500px) { .nav-links a { font-size: 14.5px; } }
+.nav-cta { font-size: 15.5px; font-weight: 600; color: #fff; padding: 13px 26px; border-radius: 999px; white-space: nowrap; }
 @media (max-width: 1350px) { .nav-links { display: none; } }
 
 /* Mobile menu */
@@ -405,6 +405,9 @@ h1, h2, h3, h4, h5 { font-weight: 600; }
 .chip:focus-visible, .shop-card a:focus-visible { outline: 3px solid var(--brand-blue); outline-offset: 3px; }
 .shop-group-intro { max-width: 70ch; margin-top: 12px; color: rgba(42,33,24,.72); line-height: 1.65; }
 .shop-card { display: flex; flex-direction: column; }
+.shop-card .banner.has-img { display: block; position: relative; flex: 0 0 auto; aspect-ratio: 4 / 3; overflow: hidden; background: #0b2f40; }
+.shop-card .banner.has-img img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.shop-card--fish .banner.has-img img { object-fit: contain; }
 .shop-card .pb { flex: 1; display: flex; flex-direction: column; }
 .shop-card .desc { margin: 0 0 12px; }
 .shop-card .prow { margin-top: auto; min-height: 44px; }
